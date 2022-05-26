@@ -2,9 +2,11 @@
 .item {
     color: brown;
     font-style: italic;
+    margin: 10px;
 }
 
 .item img {
     height: 60px;
-    border-radius: 100%;
+    border-radius: 15%;
+    margin-top: 10px;
 }
