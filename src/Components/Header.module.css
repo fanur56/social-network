@@ -1,0 +1,9 @@
+
+.header .imgLogo {
+    height: 30px;
+}
+
+.header {
+    grid-area: h;
+    background-color: greenyellow;
+}

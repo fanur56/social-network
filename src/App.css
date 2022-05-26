@@ -13,24 +13,11 @@
 
 }
 
-.header .img-logo {
-  height: 30px;
-}
 
-.header {
-  grid-area: h;
-  background-color: greenyellow;
-}
 
-.nav {
-  grid-area: n;
-  background-color: yellow;
-}
 
-.content {
-  grid-area: c;
-  background-color: aqua;
-}
+
+
 
 
 
