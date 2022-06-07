@@ -4,6 +4,13 @@
     background-color: yellow;
 }
 
-.item {
+.item a{
     color: red;
+    text-decoration: none;
 }
+
+.item a.active{
+    color: black;
+    text-decoration: none;
+}
+
