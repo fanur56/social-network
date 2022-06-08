@@ -1,12 +1,8 @@
 import React from "react";
 import styles from './Post.module.css'
+import {postsDataType} from "../MyPosts";
 
-type MessageType = {
-    message: string
-    likes: number
-}
-
-export const Post: React.FC<MessageType> = (props) => {
+export const Post: React.FC<postsDataType> = (props) => {
     return (
         <div className={styles.item}>
             <img alt="avatar"

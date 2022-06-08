@@ -2,15 +2,16 @@ import React from "react";
 import styles from './MyPosts.module.css'
 import {Post} from "./Post/Post";
 
-let postsData = [
-    {message: 'Hello', likes: 0},
-    {message: 'How are you?', likes: 12}
-]
+type postsDataPropsType = {
+    postsData:Array<postsDataType>
+}
 
+export type postsDataType ={
+    message:string
+    likes:number
+}
 
-export const MyPosts = () => {
-
-
+export const MyPosts:React.FC<postsDataPropsType> = (props) => {
     return (
         <div>
             <div>
@@ -20,7 +21,7 @@ export const MyPosts = () => {
             <button>Add post</button>
             <div className={styles.posts}>
                 New posts
-                {postsData.map(m => <Post message={m.message} likes={m.likes}/>)}
+                {props.postsData.map(m => <Post message={m.message} likes={m.likes}/>)}
             </div>
         </div>
     )

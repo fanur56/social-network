@@ -2,6 +2,12 @@ import React from "react";
 import styles from './Profile.module.css'
 import {MyPosts} from "./MyPosts/MyPosts";
 
+
+let postsData = [
+    {message: 'Hello', likes: 0},
+    {message: 'How are you?', likes: 12}
+]
+
 export const Profile = () => {
     return (
         <div>
@@ -11,7 +17,7 @@ export const Profile = () => {
             <div>
                 Ava+description
             </div>
-            <MyPosts />
+            <MyPosts postsData={postsData}/>
         </div>
     )
 }
