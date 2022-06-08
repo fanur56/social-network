@@ -2,7 +2,15 @@ import React from "react";
 import styles from './MyPosts.module.css'
 import {Post} from "./Post/Post";
 
+let postsData = [
+    {message: 'Hello', likes: 0},
+    {message: 'How are you?', likes: 12}
+]
+
+
 export const MyPosts = () => {
+
+
     return (
         <div>
             <div>
@@ -12,8 +20,7 @@ export const MyPosts = () => {
             <button>Add post</button>
             <div className={styles.posts}>
                 New posts
-                <Post message={'Hello'}/>
-                <Post message={'How are you?'}/>
+                {postsData.map(m => <Post message={m.message} likes={m.likes}/>)}
             </div>
         </div>
     )
