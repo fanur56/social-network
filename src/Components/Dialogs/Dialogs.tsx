@@ -4,11 +4,11 @@ import React from "react";
 
 type DialogItemPropsType = {
     name: string
-    id: string
+    id: number
 }
 
 type DialogMessagePropsType = {
-    message:string
+    message: string
 }
 
 export const DialogItem: React.FC<DialogItemPropsType> = (props) => {
@@ -20,20 +20,28 @@ export const DialogMessage: React.FC<DialogMessagePropsType> = (props) => {
 }
 
 export const Dialogs = (props: string) => {
+    let dialogData = [
+        {id: 1, name: "Oleg"},
+        {id: 2, name: "Olya"},
+        {id: 3, name: "Sergey"},
+        {id: 4, name: "Kent"},
+        {id: 5, name: "Garry"},
+        {id: 6, name: "Kenta"}
+    ]
+
+    let messagesData = [
+        {message: "Hello"},
+        {message: "How are you?"},
+        {message: "I am ok."},
+    ]
+
     return (
         <div className={s.dialogs}>
             <div className={s.dialogsItems}>
-                <DialogItem name="Oleg" id="1"/>
-                <DialogItem name="Olya" id="2"/>
-                <DialogItem name="Sergey" id="3"/>
-                <DialogItem name="Kent" id="4"/>
-                <DialogItem name="Garry" id="5"/>
-                <DialogItem name="Kenta" id="6"/>
+                {dialogData.map (el => <DialogItem name={el.name} id={el.id} />)}
             </div>
             <div className={s.messages}>
-                <DialogMessage message={"Hello"}/>
-                <DialogMessage message={"How are you?"}/>
-                <DialogMessage message={"I am ok."}/>
+                {messagesData.map(el => <DialogMessage message={el.message}/>)}
             </div>
         </div>
     )
