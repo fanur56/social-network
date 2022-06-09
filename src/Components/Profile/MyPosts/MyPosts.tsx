@@ -1,17 +1,13 @@
 import React from "react";
 import styles from './MyPosts.module.css'
 import {Post} from "./Post/Post";
+import {postsDataType, PostsMessagesType} from "../../../redux/redux";
 
-type postsDataPropsType = {
+type MyPostsPropsType={
     postsData:Array<postsDataType>
 }
 
-export type postsDataType ={
-    message:string
-    likes:number
-}
-
-export const MyPosts:React.FC<postsDataPropsType> = (props) => {
+export const MyPosts= (props:MyPostsPropsType) => {
     return (
         <div>
             <div>
@@ -21,7 +17,7 @@ export const MyPosts:React.FC<postsDataPropsType> = (props) => {
             <button>Add post</button>
             <div className={styles.posts}>
                 New posts
-                {props.postsData.map(m => <Post message={m.message} likes={m.likes}/>)}
+                {props.postsData.map((m:postsDataType) => <Post message={m.message} likes={m.likes}/>)}
             </div>
         </div>
     )

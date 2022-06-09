@@ -8,23 +8,29 @@ import {BrowserRouter, Route} from "react-router-dom";
 import {News} from "./Components/News/News";
 import {Music} from "./Components/Music/Music";
 import {Settings} from "./Components/Settings/Settings";
+import {PostsMessagesType, StateType} from "./redux/redux";
 
-function App() {
+type AppPropsType = {
+    store: StateType
+}
+
+function App(props: AppPropsType) {
     return (
         <BrowserRouter>
-        <div className="app-wrapper">
-            <Header/>
-            <Navbar/>
-            <div className="app-wrapper-content">
-                <Route path="/DialogsItem" component={Dialogs}/>
-                <Route path="/Profile" component={Profile}/>
-                <Route path="/News" component={News}/>
-                <Route path="/Music" component={Music}/>
-                <Route path="/Settings" component={Settings}/>
+            <div className="app-wrapper">
+                <Header/>
+                <Navbar/>
+                <div className="app-wrapper-content">
+                    <Route path="/DialogsItem" render={() => <Dialogs dialogData={props.store.dialog.dialogData}
+                                                                      messagesData={props.store.dialog.messagesData}/>}/>
+                    <Route path="/Profile" render={() => <Profile postsMessages={props.store.posts.postsMessages}/>}/>
+                    <Route path="/News" component={News}/>
+                    <Route path="/Music" component={Music}/>
+                    <Route path="/Settings" component={Settings}/>
+                </div>
             </div>
-        </div>
         </BrowserRouter>
     );
 }
 
-            export default App;
+export default App;
