@@ -1,11 +1,11 @@
 import React from "react";
 import {MyPosts} from "./MyPosts/MyPosts";
-import {PostsMessagesType} from "../../redux/redux";
+import {AddPostType, PostsMessagesType} from "../../redux/redux";
 import s from "./Profile.module.css"
 
 type ProfilePropsType={
     postsMessages:PostsMessagesType
-
+    addPost:AddPostType
 }
 
 
@@ -19,7 +19,8 @@ export const Profile= (props:ProfilePropsType) => {
             <div>
                 Ava+description
             </div>
-            <MyPosts postsData={props.postsMessages.postsData}/>
+            <MyPosts postsData={props.postsMessages.postsData}
+                     addPost={props.addPost}/>
         </div>
     )
 }

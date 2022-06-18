@@ -8,10 +8,11 @@ import {BrowserRouter, Route} from "react-router-dom";
 import {News} from "./Components/News/News";
 import {Music} from "./Components/Music/Music";
 import {Settings} from "./Components/Settings/Settings";
-import {StateType} from "./redux/redux";
+import {AddPostType, StateType} from "./redux/redux";
 
 type AppPropsType = {
     store: StateType
+    addPost:AddPostType
 }
 
 function App(props: AppPropsType) {
@@ -23,7 +24,8 @@ function App(props: AppPropsType) {
                 <div className="app-wrapper-content">
                     <Route path="/DialogsItem" render={() => <Dialogs dialogData={props.store.dialog.dialogData}
                                                                       messagesData={props.store.dialog.messagesData}/>}/>
-                    <Route path="/Profile" render={() => <Profile postsMessages={props.store.posts.postsMessages}/>}/>
+                    <Route path="/Profile" render={() => <Profile postsMessages={props.store.posts.postsMessages}
+                                                                  addPost={props.addPost}/>}/>
                     <Route path="/News" component={News}/>
                     <Route path="/Music" component={Music}/>
                     <Route path="/Settings" component={Settings}/>

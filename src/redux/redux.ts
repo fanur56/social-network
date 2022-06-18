@@ -1,3 +1,5 @@
+import {rerenderEntireTree} from "../render";
+
 export type StateType = {
     dialog: DialogType
     posts: PostsType
@@ -22,15 +24,18 @@ export type PostsType = {
 }
 
 export type PostsMessagesType = {
-    postsData: Array<postsDataType>
+    postsData: Array<PostsDataType>
 }
 
-export type postsDataType = {
+export type PostsDataType = {
     message: string
     likes: number
 }
 
-export let state: StateType = {
+export type AddPostType = (newPost: string) => void
+
+
+export const state: StateType = {
     dialog: {
         dialogData: [
             {id: 1, name: "Oleg"},
@@ -54,4 +59,13 @@ export let state: StateType = {
             ]
         }
     }
+}
+
+export const addPost = (newPost: string) => {
+    const someNewPost = {
+        message: newPost,
+        likes: 0
+    }
+    state.posts.postsMessages.postsData.push(someNewPost)
+    rerenderEntireTree(state)
 }

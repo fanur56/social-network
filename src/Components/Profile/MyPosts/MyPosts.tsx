@@ -1,19 +1,21 @@
 import React from "react";
 import styles from './MyPosts.module.css'
 import {Post} from "./Post/Post";
-import {postsDataType} from "../../../redux/redux";
+import {AddPostType, PostsDataType} from "../../../redux/redux";
 
 type MyPostsPropsType = {
-    postsData: Array<postsDataType>
+    postsData: Array<PostsDataType>
+    addPost: AddPostType
 }
 
 export const MyPosts = (props: MyPostsPropsType) => {
 
     const newPostElement: any = React.createRef()
 
-    const addPost = () => {
+    const addNewPost = () => {
         const text = newPostElement.current.value
-        alert(text)
+        props.addPost(text)
+        newPostElement.current.value=""
     }
 
     return (
@@ -22,10 +24,10 @@ export const MyPosts = (props: MyPostsPropsType) => {
                 My posts
             </div>
             <textarea ref={newPostElement}></textarea>
-            <button onClick={addPost}>Add post</button>
+            <button onClick={addNewPost}>Add post</button>
             <div className={styles.posts}>
                 New posts
-                {props.postsData.map((m: postsDataType) => <Post message={m.message} likes={m.likes}/>)}
+                {props.postsData.map((m: PostsDataType) => <Post message={m.message} likes={m.likes}/>)}
             </div>
         </div>
     )
