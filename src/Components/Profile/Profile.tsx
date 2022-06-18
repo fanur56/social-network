@@ -1,7 +1,7 @@
 import React from "react";
-import styles from './Profile.module.css'
 import {MyPosts} from "./MyPosts/MyPosts";
-import {postsDataType, PostsMessagesType, PostsType} from "../../redux/redux";
+import {PostsMessagesType} from "../../redux/redux";
+import s from "./Profile.module.css"
 
 type ProfilePropsType={
     postsMessages:PostsMessagesType
@@ -13,7 +13,7 @@ type ProfilePropsType={
 export const Profile= (props:ProfilePropsType) => {
     return (
         <div>
-            <div>
+            <div className={s.profileImage}>
                 <img alt='pic' src='https://mediaproxy.salon.com/width/1200/https://media.salon.com/2022/04/planet-pluto-0405221.jpg'/>
             </div>
             <div>
