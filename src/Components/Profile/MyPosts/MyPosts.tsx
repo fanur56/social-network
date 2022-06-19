@@ -10,12 +10,14 @@ type MyPostsPropsType = {
 
 export const MyPosts = (props: MyPostsPropsType) => {
 
-    const newPostElement: any = React.createRef()
+    const newPostElement = React.createRef<HTMLTextAreaElement>()
 
     const addNewPost = () => {
-        const text = newPostElement.current.value
-        props.addPost(text)
-        newPostElement.current.value=""
+        if (newPostElement.current) {
+            const text = newPostElement.current.value
+            props.addPost(text)
+            newPostElement.current.value = ""
+        }
     }
 
     return (

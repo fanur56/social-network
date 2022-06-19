@@ -8,8 +8,6 @@ type ProfilePropsType={
     addPost:AddPostType
 }
 
-
-
 export const Profile= (props:ProfilePropsType) => {
     return (
         <div>
