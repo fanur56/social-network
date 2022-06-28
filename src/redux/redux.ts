@@ -20,11 +20,8 @@ export type MessagesDataType = {
 }
 
 export type PostsType = {
-    postsMessages: PostsMessagesType
-}
-
-export type PostsMessagesType = {
     postsData: Array<PostsDataType>
+    newPostText: string
 }
 
 export type PostsDataType = {
@@ -32,7 +29,9 @@ export type PostsDataType = {
     likes: number
 }
 
-export type AddPostType = (newPost: string) => void
+export type AddPostType = () => void
+
+export type updateNewPostTextType = (newText: string) => void
 
 
 export const state: StateType = {
@@ -52,20 +51,27 @@ export const state: StateType = {
         ]
     },
     posts: {
-        postsMessages: {
-            postsData: [
-                {message: 'Hello', likes: 0},
-                {message: 'How are you?', likes: 12}
-            ]
-        }
+        postsData: [
+            {message: 'Hello', likes: 0},
+            {message: 'How are you?', likes: 12}
+        ],
+        newPostText: 'hello'
     }
+
+
 }
 
-export const addPost = (newPost: string) => {
+export const addPost = () => {
     const someNewPost = {
-        message: newPost,
+        message: state.posts.newPostText,
         likes: 0
     }
-    state.posts.postsMessages.postsData.push(someNewPost)
+    state.posts.postsData.push(someNewPost)
+    state.posts.newPostText = ''
+    rerenderEntireTree(state)
+}
+
+export const updateNewPostText = (newText: string) => {
+    state.posts.newPostText = newText
     rerenderEntireTree(state)
 }
