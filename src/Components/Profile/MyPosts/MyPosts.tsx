@@ -1,12 +1,12 @@
 import React from "react";
 import styles from './MyPosts.module.css'
 import {Post} from "./Post/Post";
-import {AddPostType, PostsDataType, PostsType, updateNewPostTextType} from "../../../redux/redux";
+import {AddPostType, PostsDataType, PostsType, UpdateNewPostTextType} from "../../../redux/redux";
 
 type MyPostsPropsType = {
     postsData: PostsType
     addPost: AddPostType
-    updateNewPostText: updateNewPostTextType
+    updateNewPostText: UpdateNewPostTextType
 }
 
 export const MyPosts = (props: MyPostsPropsType) => {
