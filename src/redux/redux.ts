@@ -1,5 +1,10 @@
-let rerenderEntireTree = (state: StateType)=>{
-    console.log('state changed')
+export type StoreType = {
+    _state: StateType
+    getState: any   // need fix
+    _callSubscriber: (state: StateType) => void
+    addPost: () => void
+    updateNewPostText: (newText: string) => void
+    subscribe: (observer: ObserverType) => void
 }
 
 export type StateType = {
@@ -35,10 +40,10 @@ export type AddPostType = () => void
 
 export type UpdateNewPostTextType = (newText: string) => void
 
-type ObserverType = (state:StateType) => void
+type ObserverType = (state: StateType) => void
 
 
-export const state: StateType = {
+/*export const state: StateType = {
     dialog: {
         dialogData: [
             {id: 1, name: "Oleg"},
@@ -61,25 +66,55 @@ export const state: StateType = {
         ],
         newPostText: 'hello'
     }
+}*/
 
-
-}
-
-export const addPost = () => {
-    const someNewPost = {
-        message: state.posts.newPostText,
-        likes: 0
+export const store: StoreType = {
+    _state: {
+        dialog: {
+            dialogData: [
+                {id: 1, name: "Oleg"},
+                {id: 2, name: "Ola"},
+                {id: 3, name: "Sergey"},
+                {id: 4, name: "Kent"},
+                {id: 5, name: "Garry"},
+                {id: 6, name: "Kenta"}
+            ],
+            messagesData: [
+                {message: "Hello"},
+                {message: "How are you?"},
+                {message: "I am ok."},
+            ]
+        },
+        posts: {
+            postsData: [
+                {message: 'Hello', likes: 0},
+                {message: 'How are you?', likes: 12}
+            ],
+            newPostText: 'hello'
+        }
+    },
+    getState() {
+        return this._state
+    },
+    _callSubscriber(state: StateType) {
+        console.log('state changed')
+    },
+    addPost() {
+        const someNewPost = {
+            message: this._state.posts.newPostText,
+            likes: 0
+        }
+        this._state.posts.postsData.push(someNewPost)
+        this._state.posts.newPostText = ''
+        this._callSubscriber(this._state)
+    },
+    updateNewPostText(newText: string) {
+        this._state.posts.newPostText = newText
+        this._callSubscriber(this._state)
+    },
+    subscribe(observer: ObserverType) {
+        this._callSubscriber = observer
     }
-    state.posts.postsData.push(someNewPost)
-    state.posts.newPostText = ''
-    rerenderEntireTree(state)
 }
 
-export const updateNewPostText = (newText: string) => {
-    state.posts.newPostText = newText
-    rerenderEntireTree(state)
-}
-
-export const subscribe=(observer: ObserverType)=>{
-    rerenderEntireTree = observer
-}
+//window.store = store

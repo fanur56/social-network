@@ -11,7 +11,7 @@ import {Settings} from "./Components/Settings/Settings";
 import {AddPostType, StateType, UpdateNewPostTextType} from "./redux/redux";
 
 type AppPropsType = {
-    store: StateType
+    state: any // need fix
     addPost:AddPostType
     updateNewPostText: UpdateNewPostTextType
 }
@@ -23,9 +23,9 @@ function App(props: AppPropsType) {
                 <Header/>
                 <Navbar/>
                 <div className="app-wrapper-content">
-                    <Route path="/DialogsItem" render={() => <Dialogs dialogData={props.store.dialog.dialogData}
-                                                                      messagesData={props.store.dialog.messagesData}/>}/>
-                    <Route path="/Profile" render={() => <Profile postsData={props.store.posts}
+                    <Route path="/DialogsItem" render={() => <Dialogs dialogData={props.state.dialog.dialogData}
+                                                                      messagesData={props.state.dialog.messagesData}/>}/>
+                    <Route path="/Profile" render={() => <Profile postsData={props.state.posts}
                                                                   addPost={props.addPost}
                                                                   updateNewPostText={props.updateNewPostText}/>}/>
                     <Route path="/News" component={News}/>
