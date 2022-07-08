@@ -5,7 +5,7 @@ export type StoreType = {
     addPost: (newPostText: string) => void
     updateNewPostText: (newText: string) => void
     subscribe: (observer: ObserverType) => void
-    dispatch: (action:AddPostActionType | UpdateNewPostTextActionType)=>void
+    dispatch: (action: AddPostActionType | UpdateNewPostTextActionType) => void
 }
 
 export type StateType = {
@@ -47,6 +47,9 @@ export type UpdateNewPostTextActionType = {
 }
 
 type ObserverType = (state: StateType) => void
+
+const ADD_POST = 'ADD-POST'
+const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT'
 
 export const store: StoreType = {
     _state: {
@@ -97,7 +100,7 @@ export const store: StoreType = {
         this._callSubscriber(this._state)
     },
     dispatch(action) {
-        if (action.type === 'ADD-POST') {
+        if (action.type === ADD_POST) {
             const someNewPost = {
                 message: this._state.posts.newPostText,
                 likes: 0
@@ -105,12 +108,17 @@ export const store: StoreType = {
             this._state.posts.postsData.push(someNewPost)
             this._state.posts.newPostText = ''
             this._callSubscriber(this._state)
-        } else if (action.type === 'UPDATE-NEW-POST-TEXT') {
+        } else if (action.type === UPDATE_NEW_POST_TEXT) {
             this._state.posts.newPostText = action.newText
             this._callSubscriber(this._state)
         }
     }
 }
+
+export const addNewPostActionCreator = (): AddPostActionType => ({type: ADD_POST})
+
+export const updateNewPostTextActionCreator = (text: string): UpdateNewPostTextActionType => ({type: UPDATE_NEW_POST_TEXT, newText: text})
+
 
 //window.store = store
 
