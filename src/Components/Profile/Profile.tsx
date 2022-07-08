@@ -1,15 +1,14 @@
 import React from "react";
 import {MyPosts} from "./MyPosts/MyPosts";
 import {
-    AddPostActionType,
-    PostsType,
-    UpdateNewPostTextActionType
+    DispatchActionType,
+    PostsType
 } from "../../redux/redux";
 import s from "./Profile.module.css"
 
 type ProfilePropsType={
     posts:PostsType
-    dispatch: (action:AddPostActionType | UpdateNewPostTextActionType)=>void
+    dispatch: (action: DispatchActionType) => void
 }
 
 export const Profile= (props:ProfilePropsType) => {

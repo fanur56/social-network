@@ -9,14 +9,13 @@ import {News} from "./Components/News/News";
 import {Music} from "./Components/Music/Music";
 import {Settings} from "./Components/Settings/Settings";
 import {
-    AddPostActionType,
-    StateType,
-    UpdateNewPostTextActionType
+    DispatchActionType,
+    StateType
 } from "./redux/redux";
 
 type AppPropsType = {
     state: StateType
-    dispatch: (action:AddPostActionType | UpdateNewPostTextActionType)=>void
+    dispatch: (action: DispatchActionType) => void
 }
 
 function App(props: AppPropsType) {
@@ -26,13 +25,15 @@ function App(props: AppPropsType) {
                 <Header/>
                 <Navbar/>
                 <div className="app-wrapper-content">
-                    <Route path="/DialogsItem" render={() => <Dialogs dialogData={props.state.dialog.dialogData}
-                                                                      messagesData={props.state.dialog.messagesData}/>}/>
-                    <Route path="/Profile" render={() => <Profile posts={props.state.posts}
+                    <Route path="/dialogs" render={() => <Dialogs dialogData={props.state.dialog.dialogData}
+                                                                  messagesData={props.state.dialog.messagesData}
+                                                                  newMessagesBody={props.state.dialog.newMessagesBody}
                                                                   dispatch={props.dispatch}/>}/>
-                    <Route path="/News" component={News}/>
-                    <Route path="/Music" component={Music}/>
-                    <Route path="/Settings" component={Settings}/>
+                    <Route path="/profile" render={() => <Profile posts={props.state.posts}
+                                                                  dispatch={props.dispatch}/>}/>
+                    <Route path="/news" component={News}/>
+                    <Route path="/music" component={Music}/>
+                    <Route path="/settings" component={Settings}/>
                 </div>
             </div>
         </BrowserRouter>

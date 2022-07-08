@@ -1,21 +1,35 @@
 import s from "./Dialogs.module.css"
 import React from "react";
-import {DialogMessage} from "./DialogMessages/DialogsItem";
-import {DialogItem} from "./DialogItem/DialogsItem";
-import {DialogDataType, MessagesDataType} from "../../redux/redux";
+import {DialogMessage} from "./DialogItem/DialogsItem";
+import {DialogItem} from "./DialogMessage/DialogMessage";
+import {
+    DialogDataType,
+    DispatchActionType,
+    MessagesDataType, sendNewMessageBodyCreator, updateNewMessageTextCreator
+} from "../../redux/redux";
 
 type DialogsPropsType = {
     dialogData: Array<DialogDataType>
     messagesData: Array<MessagesDataType>
+    newMessagesBody:string
+    dispatch: (action: DispatchActionType) => void
 }
 
 export const Dialogs = (props: DialogsPropsType) => {
 
-    const newMessageElement: any = React.createRef()
+    const newMessageElement = React.createRef<HTMLTextAreaElement>()
 
     const addDialogMessage = () => {
-        let textOfMessage = newMessageElement.current.value
-        alert(textOfMessage)
+        if (newMessageElement.current) {
+            props.dispatch(sendNewMessageBodyCreator())
+        }
+    }
+
+    const onNewMessageChange = () => {
+        if (newMessageElement.current) {
+            let body = newMessageElement.current.value
+            props.dispatch(updateNewMessageTextCreator(body))
+        }
     }
 
     return (
@@ -27,7 +41,10 @@ export const Dialogs = (props: DialogsPropsType) => {
                 {props.messagesData.map((message: MessagesDataType) => <DialogMessage message={message.message}/>)}
             </div>
             <div>
-                <textarea ref={newMessageElement}></textarea>
+                <textarea ref={newMessageElement}
+                          value={props.newMessagesBody}
+                          placeholder={'Enter your message'}
+                          onChange={onNewMessageChange}></textarea>
                 <button onClick={addDialogMessage}>Add message</button>
             </div>
         </div>

@@ -1,11 +1,10 @@
-import React from "react";
-import {NavLink} from "react-router-dom";
 
-type DialogItemPropsType = {
-    name: string
-    id: number
+import React from "react";
+
+export type DialogMessagePropsType = {
+    message: string
 }
 
-export const DialogItem = (props:DialogItemPropsType) => {
-    return <NavLink to={"/dialogs/" + props.id}>{props.name}</NavLink>
+export const DialogMessage: React.FC<DialogMessagePropsType> = (props:DialogMessagePropsType) => {
+    return <div>{props.message}</div>
 }

@@ -2,16 +2,16 @@ import React from "react";
 import styles from './MyPosts.module.css'
 import {Post} from "./Post/Post";
 import {
-    addNewPostActionCreator,
+    addNewPostCreator,
     AddPostActionType,
     PostsDataType,
-    PostsType, updateNewPostTextActionCreator,
-    UpdateNewPostTextActionType
+    PostsType, updateNewPostTextCreator,
+    UpdateNewPostTextActionType, DispatchActionType
 } from "../../../redux/redux";
 
 type MyPostsPropsType = {
     posts: PostsType
-    dispatch: (action: AddPostActionType | UpdateNewPostTextActionType) => void
+    dispatch: (action: DispatchActionType) => void
 }
 
 
@@ -22,14 +22,14 @@ export const MyPosts = (props: MyPostsPropsType) => {
 
     const addNewPost = () => {
         if (newPostElement.current) {
-            props.dispatch(addNewPostActionCreator())
+            props.dispatch(addNewPostCreator())
         }
     }
 
     const onPostChange = () => {
         if (newPostElement.current) {
             const text = newPostElement.current.value
-            props.dispatch(updateNewPostTextActionCreator(text))
+            props.dispatch(updateNewPostTextCreator(text))
         }
     }
 
