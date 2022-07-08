@@ -1,10 +1,11 @@
 export type StoreType = {
     _state: StateType
-    getState: any   // need fix
+    getState: () => StateType
     _callSubscriber: (state: StateType) => void
-    addPost: () => void
+    addPost: (newPostText: string) => void
     updateNewPostText: (newText: string) => void
     subscribe: (observer: ObserverType) => void
+    dispatch: (action:AddPostActionType | UpdateNewPostTextActionType)=>void
 }
 
 export type StateType = {
@@ -36,37 +37,16 @@ export type PostsDataType = {
     likes: number
 }
 
-export type AddPostType = () => void
+export type AddPostActionType = {
+    type: 'ADD-POST'
+}
 
-export type UpdateNewPostTextType = (newText: string) => void
+export type UpdateNewPostTextActionType = {
+    type: 'UPDATE-NEW-POST-TEXT'
+    newText: string
+}
 
 type ObserverType = (state: StateType) => void
-
-
-/*export const state: StateType = {
-    dialog: {
-        dialogData: [
-            {id: 1, name: "Oleg"},
-            {id: 2, name: "Ola"},
-            {id: 3, name: "Sergey"},
-            {id: 4, name: "Kent"},
-            {id: 5, name: "Garry"},
-            {id: 6, name: "Kenta"}
-        ],
-        messagesData: [
-            {message: "Hello"},
-            {message: "How are you?"},
-            {message: "I am ok."},
-        ]
-    },
-    posts: {
-        postsData: [
-            {message: 'Hello', likes: 0},
-            {message: 'How are you?', likes: 12}
-        ],
-        newPostText: 'hello'
-    }
-}*/
 
 export const store: StoreType = {
     _state: {
@@ -99,7 +79,11 @@ export const store: StoreType = {
     _callSubscriber(state: StateType) {
         console.log('state changed')
     },
-    addPost() {
+
+    subscribe(observer: ObserverType) {
+        this._callSubscriber = observer
+    },
+    addPost(newPostText: string) {
         const someNewPost = {
             message: this._state.posts.newPostText,
             likes: 0
@@ -112,9 +96,22 @@ export const store: StoreType = {
         this._state.posts.newPostText = newText
         this._callSubscriber(this._state)
     },
-    subscribe(observer: ObserverType) {
-        this._callSubscriber = observer
+    dispatch(action) {
+        if (action.type === 'ADD-POST') {
+            const someNewPost = {
+                message: this._state.posts.newPostText,
+                likes: 0
+            }
+            this._state.posts.postsData.push(someNewPost)
+            this._state.posts.newPostText = ''
+            this._callSubscriber(this._state)
+        } else if (action.type === 'UPDATE-NEW-POST-TEXT') {
+            this._state.posts.newPostText = action.newText
+            this._callSubscriber(this._state)
+        }
     }
 }
 
 //window.store = store
+
+

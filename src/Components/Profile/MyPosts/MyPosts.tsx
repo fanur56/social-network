@@ -1,12 +1,16 @@
 import React from "react";
 import styles from './MyPosts.module.css'
 import {Post} from "./Post/Post";
-import {AddPostType, PostsDataType, PostsType, UpdateNewPostTextType} from "../../../redux/redux";
+import {
+    AddPostActionType,
+    PostsDataType,
+    PostsType,
+    UpdateNewPostTextActionType
+} from "../../../redux/redux";
 
 type MyPostsPropsType = {
-    postsData: PostsType
-    addPost: AddPostType
-    updateNewPostText: UpdateNewPostTextType
+    posts: PostsType
+    dispatch: (action: AddPostActionType | UpdateNewPostTextActionType) => void
 }
 
 export const MyPosts = (props: MyPostsPropsType) => {
@@ -15,14 +19,14 @@ export const MyPosts = (props: MyPostsPropsType) => {
 
     const addNewPost = () => {
         if (newPostElement.current) {
-            props.addPost()
+            props.dispatch({type: 'ADD-POST'})
         }
     }
 
     const onPostChange = () => {
         if (newPostElement.current) {
             const text = newPostElement.current.value
-            props.updateNewPostText(text)
+            props.dispatch({type: 'UPDATE-NEW-POST-TEXT', newText: text})
         }
     }
 
@@ -31,11 +35,11 @@ export const MyPosts = (props: MyPostsPropsType) => {
             <div>
                 My posts
             </div>
-            <textarea ref={newPostElement} value={props.postsData.newPostText} onChange={onPostChange}></textarea>
+            <textarea ref={newPostElement} value={props.posts.newPostText} onChange={onPostChange}></textarea>
             <button onClick={addNewPost}>Add post</button>
             <div className={styles.posts}>
                 New posts
-                {props.postsData.postsData.map((m: PostsDataType) => <Post message={m.message} likes={m.likes}/>)}
+                {props.posts.postsData.map((m: PostsDataType) => <Post message={m.message} likes={m.likes}/>)}
             </div>
         </div>
     )
