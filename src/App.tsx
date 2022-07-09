@@ -25,11 +25,11 @@ function App(props: AppPropsType) {
                 <Header/>
                 <Navbar/>
                 <div className="app-wrapper-content">
-                    <Route path="/dialogs" render={() => <Dialogs dialogData={props.state.dialog.dialogData}
-                                                                  messagesData={props.state.dialog.messagesData}
-                                                                  newMessagesBody={props.state.dialog.newMessagesBody}
+                    <Route path="/dialogs" render={() => <Dialogs dialogData={props.state.messagesPage.dialogData}
+                                                                  messagesData={props.state.messagesPage.messagesData}
+                                                                  newMessagesBody={props.state.messagesPage.newMessagesBody}
                                                                   dispatch={props.dispatch}/>}/>
-                    <Route path="/profile" render={() => <Profile posts={props.state.posts}
+                    <Route path="/profile" render={() => <Profile posts={props.state.profilePage}
                                                                   dispatch={props.dispatch}/>}/>
                     <Route path="/news" component={News}/>
                     <Route path="/music" component={Music}/>
