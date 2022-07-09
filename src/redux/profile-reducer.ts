@@ -1,4 +1,4 @@
-import {DispatchActionType, PostsType} from "./redux";
+import {AddPostActionType, DispatchActionType, PostsType, UpdateNewPostTextActionType} from "./redux";
 
 const ADD_POST = 'ADD-POST'
 const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT'
@@ -16,5 +16,12 @@ const profileReducer = (state: PostsType, action: DispatchActionType) => {
     }
     return state
 }
+
+export const addNewPostCreator = (): AddPostActionType => ({type: ADD_POST})
+
+export const updateNewPostTextCreator = (text: string): UpdateNewPostTextActionType => ({
+    type: UPDATE_NEW_POST_TEXT,
+    newText: text
+})
 
 export default profileReducer

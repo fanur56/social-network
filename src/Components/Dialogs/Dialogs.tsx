@@ -5,8 +5,8 @@ import {DialogItem} from "./DialogMessage/DialogMessage";
 import {
     DialogDataType,
     DispatchActionType,
-    MessagesDataType, sendNewMessageBodyCreator, updateNewMessageTextCreator
-} from "../../redux/redux";
+    MessagesDataType} from "../../redux/redux";
+import {sendNewMessageBodyCreator, updateNewMessageTextCreator} from "../../redux/messages-reducer";
 
 type DialogsPropsType = {
     dialogData: Array<DialogDataType>

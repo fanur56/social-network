@@ -1,4 +1,4 @@
-import {DialogType, DispatchActionType} from "./redux";
+import {DialogType, DispatchActionType, SendMessageActionType, UpdateNewMessageBodyActionType} from "./redux";
 
 const UPDATE_NEW_MESSAGE_BODY = 'UPDATE-NEW-MESSAGE-BODY'
 const SEND_MESSAGE = 'SEND-MESSAGE'
@@ -14,4 +14,12 @@ const messagesReducer = (state: DialogType, action: DispatchActionType) => {
 
     return state
 }
+
+export const sendNewMessageBodyCreator = (): SendMessageActionType => ({type: SEND_MESSAGE})
+
+export const updateNewMessageTextCreator = (body: string): UpdateNewMessageBodyActionType => ({
+    type: UPDATE_NEW_MESSAGE_BODY,
+    body: body
+})
+
 export default messagesReducer

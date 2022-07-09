@@ -66,11 +66,6 @@ type ObserverType = (state: StateType) => void
 
 export type DispatchActionType = (AddPostActionType | UpdateNewPostTextActionType | UpdateNewMessageBodyActionType | SendMessageActionType)
 
-const ADD_POST = 'ADD-POST'
-const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT'
-const UPDATE_NEW_MESSAGE_BODY = 'UPDATE-NEW-MESSAGE-BODY'
-const SEND_MESSAGE = 'SEND-MESSAGE'
-
 export const store: StoreType = {
     _state: {
         messagesPage: {
@@ -116,20 +111,6 @@ export const store: StoreType = {
         this._callSubscriber(this._state)
     }
 }
-
-export const addNewPostCreator = (): AddPostActionType => ({type: ADD_POST})
-
-export const updateNewPostTextCreator = (text: string): UpdateNewPostTextActionType => ({
-    type: UPDATE_NEW_POST_TEXT,
-    newText: text
-})
-
-export const sendNewMessageBodyCreator = (): SendMessageActionType => ({type: SEND_MESSAGE})
-
-export const updateNewMessageTextCreator = (body: string): UpdateNewMessageBodyActionType => ({
-    type: UPDATE_NEW_MESSAGE_BODY,
-    body: body
-})
 
 //window.store = store
 
