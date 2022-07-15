@@ -1,8 +1,8 @@
-import {DispatchActionType, SidebarType} from "./redux";
+import {DispatchActionType, SidebarType} from "./store";
 
-const sidebarReducer = (state:SidebarType, action:DispatchActionType) => {
+const initialState: SidebarType = {}
 
-
+const sidebarReducer = (state: SidebarType, action: DispatchActionType) => {
     return state
 }
 

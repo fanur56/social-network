@@ -3,7 +3,7 @@ import {MyPosts} from "./MyPosts/MyPosts";
 import {
     DispatchActionType,
     PostsType
-} from "../../redux/redux";
+} from "../../redux/store";
 import s from "./Profile.module.css"
 
 type ProfilePropsType={

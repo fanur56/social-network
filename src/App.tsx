@@ -11,7 +11,7 @@ import {Settings} from "./Components/Settings/Settings";
 import {
     DispatchActionType,
     StateType
-} from "./redux/redux";
+} from "./redux/store";
 
 type AppPropsType = {
     state: StateType
