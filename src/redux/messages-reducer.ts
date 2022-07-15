@@ -20,7 +20,6 @@ const initialState: DialogType = {
     newMessagesBody: ''
 }
 
-
 const messagesReducer = (state = initialState, action: DispatchActionType) => {
     if (action.type === UPDATE_NEW_MESSAGE_BODY) {
         state.newMessagesBody = action.body
