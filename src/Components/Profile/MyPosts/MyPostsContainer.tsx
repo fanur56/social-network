@@ -2,14 +2,15 @@ import React from "react";
 import {addNewPostCreator, updateNewPostTextCreator} from "../../../redux/profile-reducer";
 import {MyPosts} from "./MyPosts";
 import {connect} from "react-redux";
+import {ReduxDispatchType, ReduxStateType} from "../../../redux/redux-store";
 
-const mapStateToProps=(state: any)=>{
+const mapStateToProps=(state: ReduxStateType)=>{
     return {
         profilePage: state.profilePage
     }
 }
 
-const mapDispatchToProps=(dispatch: any)=>{
+const mapDispatchToProps=(dispatch: ReduxDispatchType)=>{
     return {
         onPostChange: (text: string)=>{
             dispatch(updateNewPostTextCreator(text))
