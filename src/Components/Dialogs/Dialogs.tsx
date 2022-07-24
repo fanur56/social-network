@@ -6,7 +6,6 @@ import {
     DialogDataType, DialogType,
     MessagesDataType
 } from "../../redux/store";
-import {sendNewMessageBodyCreator, updateNewMessageTextCreator} from "../../redux/messages-reducer";
 
 type DialogsPropsType = {
     onNewMessageChange: (body: string) => void
@@ -19,23 +18,25 @@ export const Dialogs = (props: DialogsPropsType) => {
     const newMessageElement = React.createRef<HTMLTextAreaElement>()
 
     const addDialogMessage = () => {
-        sendNewMessageBodyCreator()
+        props.addDialogMessage()
     }
 
     const onNewMessageChange = () => {
         if (newMessageElement.current) {
-            let body = newMessageElement.current.value
-            updateNewMessageTextCreator(body)
+            const body = newMessageElement.current.value
+            props.onNewMessageChange(body)
         }
     }
 
     return (
         <div className={s.dialogs}>
             <div className={s.dialogsItems}>
-                {props.messagesPage.dialogData.map((dialog: DialogDataType) => <DialogItem name={dialog.name} id={dialog.id}/>)}
+                {props.messagesPage.dialogData.map((dialog: DialogDataType) => <DialogItem name={dialog.name}
+                                                                                           id={dialog.id}/>)}
             </div>
             <div className={s.messages}>
-                {props.messagesPage.messagesData.map((message: MessagesDataType) => <DialogMessage message={message.message}/>)}
+                {props.messagesPage.messagesData.map((message: MessagesDataType) => <DialogMessage
+                    message={message.message}/>)}
             </div>
             <div>
                 <textarea ref={newMessageElement}

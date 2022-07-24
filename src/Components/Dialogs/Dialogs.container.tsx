@@ -9,6 +9,7 @@ type DialogsPropsType = {
 
 export const DialogsContainer = (props: DialogsPropsType) => {
     const state = props.store.getState()
+
     const sendNewMessageBody = () => {
         props.store.dispatch(sendNewMessageBodyCreator())
     }
