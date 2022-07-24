@@ -64,7 +64,12 @@ export type SendMessageActionType = {
 
 type ObserverType = (state: StateType) => void
 
-export type DispatchActionType = (AddPostActionType | UpdateNewPostTextActionType | UpdateNewMessageBodyActionType | SendMessageActionType)
+export type DispatchActionType = (
+    AddPostActionType
+    | UpdateNewPostTextActionType
+    | UpdateNewMessageBodyActionType
+    | SendMessageActionType
+    )
 
 export const store: StoreType = {
     _state: {

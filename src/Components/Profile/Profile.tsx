@@ -1,27 +1,23 @@
 import React from "react";
-import {MyPosts} from "./MyPosts/MyPosts";
-import {
-    DispatchActionType,
-    PostsType
-} from "../../redux/store";
 import s from "./Profile.module.css"
+import {MyPostsContainer} from "./MyPosts/MyPostsContainer";
+import {ReduxStoreType} from "../../redux/redux-store";
 
-type ProfilePropsType={
-    posts:PostsType
-    dispatch: (action: DispatchActionType) => void
+type ProfilePropsType = {
+    store: ReduxStoreType
 }
 
-export const Profile= (props:ProfilePropsType) => {
+export const Profile = (props: ProfilePropsType) => {
     return (
         <div>
             <div className={s.profileImage}>
-                <img alt='pic' src='https://mediaproxy.salon.com/width/1200/https://media.salon.com/2022/04/planet-pluto-0405221.jpg'/>
+                <img alt='pic'
+                     src='https://mediaproxy.salon.com/width/1200/https://media.salon.com/2022/04/planet-pluto-0405221.jpg'/>
             </div>
             <div>
                 Ava+description
             </div>
-            <MyPosts posts={props.posts}
-                     dispatch={props.dispatch}/>
+            <MyPostsContainer store={props.store}/>
         </div>
     )
 }

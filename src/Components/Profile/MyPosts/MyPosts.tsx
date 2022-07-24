@@ -3,31 +3,28 @@ import styles from './MyPosts.module.css'
 import {Post} from "./Post/Post";
 import {
     PostsDataType,
-    PostsType, DispatchActionType
+    PostsType
 } from "../../../redux/store";
-import {addNewPostCreator, updateNewPostTextCreator} from "../../../redux/profile-reducer";
 
 type MyPostsPropsType = {
-    posts: PostsType
-    dispatch: (action: DispatchActionType) => void
+    profilePage: PostsType
+    addNewPost: () => void
+    onPostChange: (text: string) => void
 }
-
 
 
 export const MyPosts = (props: MyPostsPropsType) => {
 
     const newPostElement = React.createRef<HTMLTextAreaElement>()
 
-    const addNewPost = () => {
-        if (newPostElement.current) {
-            props.dispatch(addNewPostCreator())
-        }
+    const onAddNewPost = () => {
+        props.addNewPost()
     }
 
     const onPostChange = () => {
         if (newPostElement.current) {
-            const text = newPostElement.current.value
-            props.dispatch(updateNewPostTextCreator(text))
+            let text = newPostElement.current.value
+            props.onPostChange(text)
         }
     }
 
@@ -36,11 +33,11 @@ export const MyPosts = (props: MyPostsPropsType) => {
             <div>
                 My posts
             </div>
-            <textarea ref={newPostElement} value={props.posts.newPostText} onChange={onPostChange}></textarea>
-            <button onClick={addNewPost}>Add post</button>
+            <textarea ref={newPostElement} value={props.profilePage.newPostText} onChange={onPostChange}></textarea>
+            <button onClick={onAddNewPost}>Add post</button>
             <div className={styles.posts}>
                 New posts
-                {props.posts.postsData.map((m: PostsDataType) => <Post message={m.message} likes={m.likes}/>)}
+                {props.profilePage.postsData.map((m: PostsDataType) => <Post message={m.message} likes={m.likes}/>)}
             </div>
         </div>
     )

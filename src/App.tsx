@@ -3,19 +3,15 @@ import './App.css';
 import {Header} from "./Components/Header/Header";
 import {Navbar} from "./Components/Navbar/Navbar";
 import {Profile} from "./Components/Profile/Profile";
-import {Dialogs} from "./Components/Dialogs/Dialogs";
 import {BrowserRouter, Route} from "react-router-dom";
 import {News} from "./Components/News/News";
 import {Music} from "./Components/Music/Music";
 import {Settings} from "./Components/Settings/Settings";
-import {
-    DispatchActionType,
-    StateType
-} from "./redux/store";
+import {DialogsContainer} from "./Components/Dialogs/Dialogs.container";
+import {ReduxStoreType} from "./redux/redux-store";
 
 type AppPropsType = {
-    state: StateType
-    dispatch: (action: DispatchActionType) => void
+    store: ReduxStoreType
 }
 
 function App(props: AppPropsType) {
@@ -25,12 +21,9 @@ function App(props: AppPropsType) {
                 <Header/>
                 <Navbar/>
                 <div className="app-wrapper-content">
-                    <Route path="/dialogs" render={() => <Dialogs dialogData={props.state.messagesPage.dialogData}
-                                                                  messagesData={props.state.messagesPage.messagesData}
-                                                                  newMessagesBody={props.state.messagesPage.newMessagesBody}
-                                                                  dispatch={props.dispatch}/>}/>
-                    <Route path="/profile" render={() => <Profile posts={props.state.profilePage}
-                                                                  dispatch={props.dispatch}/>}/>
+                    <Route path="/dialogs"
+                           render={() => <DialogsContainer store={props.store}/>}/>
+                    <Route path="/profile" render={() => <Profile store={props.store}/>}/>
                     <Route path="/news" component={News}/>
                     <Route path="/music" component={Music}/>
                     <Route path="/settings" component={Settings}/>
