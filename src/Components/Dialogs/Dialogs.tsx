@@ -32,11 +32,13 @@ export const Dialogs = (props: DialogsPropsType) => {
         <div className={s.dialogs}>
             <div className={s.dialogsItems}>
                 {props.messagesPage.dialogData.map((dialog: DialogDataType) => <DialogItem name={dialog.name}
+                                                                                           key={dialog.id}
                                                                                            id={dialog.id}/>)}
             </div>
             <div className={s.messages}>
                 {props.messagesPage.messagesData.map((message: MessagesDataType) => <DialogMessage
-                    message={message.message}/>)}
+                    message={message.message}
+                    key={message.id}/>)}
             </div>
             <div>
                 <textarea ref={newMessageElement}

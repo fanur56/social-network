@@ -21,16 +21,22 @@ const initialState: DialogType = {
 }
 
 const messagesReducer = (state = initialState, action: DispatchActionType) => {
-    const stateCopy = {...state}
-    if (action.type === UPDATE_NEW_MESSAGE_BODY) {
-        stateCopy.newMessagesBody = action.body
-    } else if (action.type === SEND_MESSAGE) {
-        let body = state.newMessagesBody
-        stateCopy.messagesData.push({id: 4, message: body})
-        stateCopy.newMessagesBody = ''
+    const stateCopy = {
+        ...state,
+        messagesData: [...state.messagesData]
     }
-
-    return stateCopy
+    switch (action.type) {
+        case UPDATE_NEW_MESSAGE_BODY:
+            stateCopy.newMessagesBody = action.body
+            return stateCopy;
+        case SEND_MESSAGE:
+            let body = state.newMessagesBody
+            stateCopy.messagesData.push({id: 4, message: body})
+            stateCopy.newMessagesBody = ''
+            return stateCopy;
+        default:
+            return stateCopy
+    }
 }
 
 export const sendNewMessageBodyCreator = (): SendMessageActionType => ({type: SEND_MESSAGE})
