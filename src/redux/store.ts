@@ -40,6 +40,7 @@ export type PostsType = {
 }
 
 export type PostsDataType = {
+    id: number
     message: string
     likes: number
 }
@@ -91,8 +92,8 @@ export const store: StoreType = {
         },
         profilePage: {
             postsData: [
-                {message: 'Hello', likes: 0},
-                {message: 'How are you?', likes: 12}
+                {id:1, message: 'Hello', likes: 0},
+                {id:2, message: 'How are you?', likes: 12}
             ],
             newPostText: 'hello'
         },

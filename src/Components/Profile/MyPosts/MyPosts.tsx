@@ -33,11 +33,18 @@ export const MyPosts = (props: MyPostsPropsType) => {
             <div>
                 My posts
             </div>
-            <textarea ref={newPostElement} value={props.profilePage.newPostText} onChange={onPostChange}></textarea>
-            <button onClick={onAddNewPost}>Add post</button>
+            <textarea ref={newPostElement}
+                      value={props.profilePage.newPostText}
+                      onChange={onPostChange}>
+            </textarea>
+            <button onClick={onAddNewPost}>
+                Add post
+            </button>
             <div className={styles.posts}>
                 New posts
-                {props.profilePage.postsData.map((m: PostsDataType) => <Post message={m.message} likes={m.likes}/>)}
+                {props.profilePage.postsData.map((m: PostsDataType) => <Post key={m.id}
+                                                                             message={m.message}
+                                                                             likes={m.likes}/>)}
             </div>
         </div>
     )
