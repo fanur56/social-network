@@ -12,17 +12,18 @@ const initialState: PostsType = {
 }
 
 const profileReducer = (state = initialState, action: DispatchActionType) => {
+    const stateCopy = {...state}
     if (action.type === ADD_POST) {
         const someNewPost = {
             message: state.newPostText,
             likes: 0
         }
-        state.postsData.push(someNewPost)
-        state.newPostText = ''
+        stateCopy.postsData.push(someNewPost)
+        stateCopy.newPostText = ''
     } else if (action.type === UPDATE_NEW_POST_TEXT) {
-        state.newPostText = action.newText
+        stateCopy.newPostText = action.newText
     }
-    return state
+    return stateCopy
 }
 
 export const addNewPostCreator = (): AddPostActionType => ({type: ADD_POST})
