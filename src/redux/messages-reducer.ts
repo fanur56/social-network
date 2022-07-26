@@ -30,7 +30,7 @@ const messagesReducer = (state = initialState, action: DispatchActionType) => {
         case SEND_MESSAGE:
             return {
                 ...state,
-                messagesData: [...state.messagesData, {id: 4, message: state.newMessagesBody}],
+                messagesData: [...state.messagesData, {id: state.messagesData.length+1, message: state.newMessagesBody}],
                 newMessagesBody: ""
             }
         default:
@@ -45,4 +45,4 @@ export const updateNewMessageTextCreator = (body: string): UpdateNewMessageBodyA
     body: body
 })
 
-export default messagesReducer
+export default messagesReducer;
