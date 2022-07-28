@@ -6,41 +6,7 @@ const SET_USERS = "SET-USERS";
 
 
 const initialState: UsersStateType = {
-    users: [
-        {
-            id: 1,
-            photo: "https://undark.org/wp-content/uploads/2020/02/GettyImages-1199242002-1-scaled.jpg",
-            followed: true,
-            fullName: "Fanur",
-            status: "I am a samurai",
-            location: {
-                country: "Russia",
-                city: "Saint-Petersburg"
-            }
-        },
-        {
-            id: 2,
-            photo: "https://undark.org/wp-content/uploads/2020/02/GettyImages-1199242002-1-scaled.jpg",
-            followed: false,
-            fullName: "Dmitriy",
-            status: "I am a segun",
-            location: {
-                country: "Belarus",
-                city: "Minsk"
-            }
-        },
-        {
-            id: 3,
-            photo: "https://undark.org/wp-content/uploads/2020/02/GettyImages-1199242002-1-scaled.jpg",
-            followed: false,
-            fullName: "Ilya",
-            status: "I am a emperor",
-            location: {
-                country: "Russia",
-                city: "Moscow"
-            }
-        }
-    ]
+    users: []
 }
 
 const usersReducer = (state = initialState, action: DispatchActionType) => {
@@ -52,6 +18,7 @@ const usersReducer = (state = initialState, action: DispatchActionType) => {
                     if (u.id === action.userID) {
                         return {...u, followed: true}
                     }
+                    return u
                 })
             }
         case UNFOLLOW:
@@ -61,6 +28,7 @@ const usersReducer = (state = initialState, action: DispatchActionType) => {
                     if (u.id === action.userID) {
                         return {...u, followed: false}
                     }
+                    return u
                 })
             }
         case SET_USERS:
