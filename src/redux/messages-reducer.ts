@@ -1,4 +1,4 @@
-import {DialogType, DispatchActionType, SendMessageActionType, UpdateNewMessageBodyActionType} from "./store";
+import {DialogType, DispatchActionType, SendMessageAT, UpdateNewMessageBodyAT} from "./store";
 
 const UPDATE_NEW_MESSAGE_BODY = 'UPDATE-NEW-MESSAGE-BODY'
 const SEND_MESSAGE = 'SEND-MESSAGE'
@@ -38,9 +38,9 @@ const messagesReducer = (state = initialState, action: DispatchActionType) => {
     }
 }
 
-export const sendNewMessageBodyCreator = (): SendMessageActionType => ({type: SEND_MESSAGE})
+export const sendNewMessageBodyCreator = (): SendMessageAT => ({type: SEND_MESSAGE})
 
-export const updateNewMessageTextCreator = (body: string): UpdateNewMessageBodyActionType => ({
+export const updateNewMessageTextCreator = (body: string): UpdateNewMessageBodyAT => ({
     type: UPDATE_NEW_MESSAGE_BODY,
     body: body
 })

@@ -1,4 +1,4 @@
-import {AddPostActionType, DispatchActionType, PostsType, UpdateNewPostTextActionType} from "./store";
+import {AddPostAT, DispatchActionType, PostsType, UpdateNewPostTextAT} from "./store";
 
 const ADD_POST = 'ADD-POST'
 const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT'
@@ -36,9 +36,9 @@ const profileReducer = (state = initialState, action: DispatchActionType) => {
     }
 }
 
-export const addNewPostCreator = (): AddPostActionType => ({type: ADD_POST})
+export const addNewPostCreator = (): AddPostAT => ({type: ADD_POST})
 
-export const updateNewPostTextCreator = (text: string): UpdateNewPostTextActionType => ({
+export const updateNewPostTextCreator = (text: string): UpdateNewPostTextAT => ({
     type: UPDATE_NEW_POST_TEXT,
     newText: text
 })

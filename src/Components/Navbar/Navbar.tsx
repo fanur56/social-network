@@ -1,9 +1,6 @@
 import React from "react";
 import styles from './Navbar.module.css'
 import {NavLink} from "react-router-dom";
-import {Settings} from "../Settings/Settings";
-import {Music} from "../Music/Music";
-import {News} from "../News/News";
 
 export const Navbar = () => {
     return (
@@ -31,6 +28,11 @@ export const Navbar = () => {
             <div className={styles.item}>
                 <NavLink to="/settings" activeClassName={styles.active}>
                     Settings
+                </NavLink>
+            </div>
+            <div className={styles.item}>
+                <NavLink to="/users" activeClassName={styles.active}>
+                    Users
                 </NavLink>
             </div>
         </nav>

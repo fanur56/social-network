@@ -45,31 +45,60 @@ export type PostsDataType = {
     likes: number
 }
 
-export type AddPostActionType = {
+export type AddPostAT = {
     type: 'ADD-POST'
 }
 
-export type UpdateNewPostTextActionType = {
+export type UpdateNewPostTextAT = {
     type: 'UPDATE-NEW-POST-TEXT'
     newText: string
 }
 
-export type UpdateNewMessageBodyActionType = {
+export type UpdateNewMessageBodyAT = {
     type: 'UPDATE-NEW-MESSAGE-BODY'
     body: string
 }
 
-export type SendMessageActionType = {
+export type SendMessageAT = {
     type: 'SEND-MESSAGE'
+}
+
+export type FollowAT = {
+    type: 'FOLLOW'
+    userID: number
+}
+
+export type UnfollowAT = {
+    type: 'UNFOLLOW'
+    userID: number
+}
+
+export type UsersStateType = {
+    users: Array<UserType>
+}
+
+export type UserType = {
+    id: number
+    followed: boolean
+    fullName: string
+    status: string
+    location: UsersLocationType
+}
+
+export type UsersLocationType = {
+    country: string,
+    city: string
 }
 
 type ObserverType = (state: StateType) => void
 
 export type DispatchActionType = (
-    AddPostActionType
-    | UpdateNewPostTextActionType
-    | UpdateNewMessageBodyActionType
-    | SendMessageActionType
+    AddPostAT
+    | UpdateNewPostTextAT
+    | UpdateNewMessageBodyAT
+    | SendMessageAT
+    | FollowAT
+    | UnfollowAT
     )
 
 export const store: StoreType = {
@@ -92,8 +121,8 @@ export const store: StoreType = {
         },
         profilePage: {
             postsData: [
-                {id:1, message: 'Hello', likes: 0},
-                {id:2, message: 'How are you?', likes: 12}
+                {id: 1, message: 'Hello', likes: 0},
+                {id: 2, message: 'How are you?', likes: 12}
             ],
             newPostText: 'hello'
         },

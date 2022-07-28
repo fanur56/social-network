@@ -1,24 +1,9 @@
-import {DispatchActionType} from "./store";
+import {DispatchActionType, FollowAT, UnfollowAT, UsersStateType} from "./store";
 
 const FOLLOW = "FOLLOW";
 const UNFOLLOW = "UNFOLLOW";
 
-export type UsersStateType = {
-    users: Array<UserType>
-}
 
-export type UserType = {
-    id: number
-    followed: boolean
-    fullName: string
-    status: string
-    location: UsersLocationType
-}
-
-export type UsersLocationType = {
-    country: string,
-    city: string
-}
 
 const initialState: UsersStateType = {
     users: [
@@ -56,11 +41,33 @@ const initialState: UsersStateType = {
 }
 
 const usersReducer = (state = initialState, action: DispatchActionType) => {
-    return state
+    switch (action.type) {
+        case FOLLOW:
+            return {
+                ...state,
+                users: state.users.map(u=>{
+                    if (u.id === action.userID) {
+                        return {...u, followed: true}
+                    }
+                })
+            }
+        case UNFOLLOW:
+            return {
+                ...state,
+                users: state.users.map(u=>{
+                    if (u.id === action.userID) {
+                        return {...u, followed: false}
+                    }
+                })
+            }
+        default:
+            return state
+    }
+
 }
 
-const followAC = () => ({type: FOLLOW})
+const followAC = (userID: number): FollowAT => ({type: FOLLOW, userID})
 
-const unfollowAC = () => ({type: UNFOLLOW})
+const unfollowAC = (userID: number): UnfollowAT => ({type: UNFOLLOW, userID})
 
 export default usersReducer;
