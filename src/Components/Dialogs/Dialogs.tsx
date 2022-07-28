@@ -5,7 +5,7 @@ import {DialogItem} from "./DialogMessage/DialogMessage";
 import {
     DialogDataType, DialogType,
     MessagesDataType
-} from "../../redux/store";
+} from "../../redux/types";
 
 type DialogsPropsType = {
     onNewMessageChange: (body: string) => void

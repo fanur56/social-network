@@ -1,4 +1,4 @@
-import {AddPostAT, DispatchActionType, PostsType, UpdateNewPostTextAT} from "./store";
+import {AddPostAT, DispatchActionType, PostsType, UpdateNewPostTextAT} from "./types";
 
 const ADD_POST = 'ADD-POST'
 const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT'

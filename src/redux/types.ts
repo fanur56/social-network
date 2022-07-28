@@ -1,20 +1,3 @@
-import messagesReducer from "./messages-reducer";
-import profileReducer from "./profile-reducer";
-import sidebarReducer from "./sidebar-reducer";
-
-export type StoreType = {
-    _state: StateType
-    getState: () => StateType
-    _callSubscriber: (state: StateType) => void
-    subscribe: (observer: ObserverType) => void
-    dispatch: (action: DispatchActionType) => void
-}
-
-export type StateType = {
-    messagesPage: DialogType
-    profilePage: PostsType
-    sidebar: SidebarType
-}
 
 export type SidebarType = {}
 
@@ -73,12 +56,18 @@ export type UnfollowAT = {
     userID: number
 }
 
+export type SetUsersAT = {
+    type: "SET-USERS"
+    users: Array<UserType>
+}
+
 export type UsersStateType = {
     users: Array<UserType>
 }
 
 export type UserType = {
     id: number
+    photo: string
     followed: boolean
     fullName: string
     status: string
@@ -90,8 +79,6 @@ export type UsersLocationType = {
     city: string
 }
 
-type ObserverType = (state: StateType) => void
-
 export type DispatchActionType = (
     AddPostAT
     | UpdateNewPostTextAT
@@ -99,8 +86,26 @@ export type DispatchActionType = (
     | SendMessageAT
     | FollowAT
     | UnfollowAT
+    | SetUsersAT
     )
 
+
+
+/*export type StoreType = {
+    _state: StateType
+    getState: () => StateType
+    _callSubscriber: (state: StateType) => void
+    subscribe: (observer: ObserverType) => void
+    dispatch: (action: DispatchActionType) => void
+    type ObserverType = (state: StateType) => void
+    export type StateType = {
+    messagesPage: DialogType
+    profilePage: PostsType
+    sidebar: SidebarType
+}
+}*/
+
+/*
 export const store: StoreType = {
     _state: {
         messagesPage: {
@@ -146,6 +151,7 @@ export const store: StoreType = {
         this._callSubscriber(this._state)
     }
 }
+*/
 
 //window.store = store
 

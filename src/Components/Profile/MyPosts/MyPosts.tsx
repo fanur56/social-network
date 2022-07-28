@@ -4,7 +4,7 @@ import {Post} from "./Post/Post";
 import {
     PostsDataType,
     PostsType
-} from "../../../redux/store";
+} from "../../../redux/types";
 
 type MyPostsPropsType = {
     profilePage: PostsType

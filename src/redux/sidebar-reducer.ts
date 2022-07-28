@@ -1,4 +1,4 @@
-import {DispatchActionType, SidebarType} from "./store";
+import {DispatchActionType, SidebarType} from "./types";
 
 const initialState: SidebarType = {}
 

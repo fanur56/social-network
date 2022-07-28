@@ -1,14 +1,15 @@
-import {DispatchActionType, FollowAT, UnfollowAT, UsersStateType} from "./store";
+import {DispatchActionType, FollowAT, SetUsersAT, UnfollowAT, UsersStateType, UserType} from "./types";
 
 const FOLLOW = "FOLLOW";
 const UNFOLLOW = "UNFOLLOW";
-
+const SET_USERS = "SET-USERS";
 
 
 const initialState: UsersStateType = {
     users: [
         {
             id: 1,
+            photo: "https://undark.org/wp-content/uploads/2020/02/GettyImages-1199242002-1-scaled.jpg",
             followed: true,
             fullName: "Fanur",
             status: "I am a samurai",
@@ -19,6 +20,7 @@ const initialState: UsersStateType = {
         },
         {
             id: 2,
+            photo: "https://undark.org/wp-content/uploads/2020/02/GettyImages-1199242002-1-scaled.jpg",
             followed: false,
             fullName: "Dmitriy",
             status: "I am a segun",
@@ -29,6 +31,7 @@ const initialState: UsersStateType = {
         },
         {
             id: 3,
+            photo: "https://undark.org/wp-content/uploads/2020/02/GettyImages-1199242002-1-scaled.jpg",
             followed: false,
             fullName: "Ilya",
             status: "I am a emperor",
@@ -45,7 +48,7 @@ const usersReducer = (state = initialState, action: DispatchActionType) => {
         case FOLLOW:
             return {
                 ...state,
-                users: state.users.map(u=>{
+                users: state.users.map(u => {
                     if (u.id === action.userID) {
                         return {...u, followed: true}
                     }
@@ -54,11 +57,15 @@ const usersReducer = (state = initialState, action: DispatchActionType) => {
         case UNFOLLOW:
             return {
                 ...state,
-                users: state.users.map(u=>{
+                users: state.users.map(u => {
                     if (u.id === action.userID) {
                         return {...u, followed: false}
                     }
                 })
+            }
+        case SET_USERS:
+            return {
+                ...state, users: [...state.users, ...action.users]
             }
         default:
             return state
@@ -66,8 +73,8 @@ const usersReducer = (state = initialState, action: DispatchActionType) => {
 
 }
 
-const followAC = (userID: number): FollowAT => ({type: FOLLOW, userID})
-
-const unfollowAC = (userID: number): UnfollowAT => ({type: UNFOLLOW, userID})
+export const followAC = (userID: number): FollowAT => ({type: FOLLOW, userID})
+export const unfollowAC = (userID: number): UnfollowAT => ({type: UNFOLLOW, userID})
+export const setUsersAC = (users: Array<UserType>): SetUsersAT => ({type: SET_USERS, users})
 
 export default usersReducer;
