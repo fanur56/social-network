@@ -1,6 +1,8 @@
 import React from "react";
 import {UsersStateType, UserType} from "../../redux/types";
 import s from "./Users.module.css"
+import axios from "axios";
+import avacat from "../../assets/images/avacat.jpg"
 
 type UsersPropsType = {
     follow: (userID: number) => void
@@ -10,8 +12,15 @@ type UsersPropsType = {
 }
 
 export const Users = (props: UsersPropsType) => {
+
+    const getUsers =()=>{
     if (props.usersPage.users.length === 0) {
-        props.setUsers([
+        axios.get("https://social-network.samuraijs.com/api/1.0/users").then(r => {
+            props.setUsers(r.data.items);
+        });
+    }
+
+        /*props.setUsers([
             {
                 id: 1,
                 photo: "https://undark.org/wp-content/uploads/2020/02/GettyImages-1199242002-1-scaled.jpg",
@@ -45,15 +54,16 @@ export const Users = (props: UsersPropsType) => {
                     city: "Moscow"
                 }
             }
-        ])
+        ])*/
     }
     return (
         <div>
+            <button onClick={getUsers}>Get users</button>
             {
                 props.usersPage.users.map((u: UserType) => <div key={u.id} className={s.userContainer}>
                         <div className={s.avatarContainer}>
                             <div className={s.avatar}>
-                                <img src={u.photo} alt={"avatar"}/>
+                                <img src={u.photos.small != null ? u.photos.small : avacat} alt={"avatar"}/>
                             </div>
                             <div>
                                 {u.followed
@@ -64,7 +74,7 @@ export const Users = (props: UsersPropsType) => {
                         <div className={s.descriptionContainer}>
                             <div className={s.name}>
                                 <div>
-                                    {u.fullName}
+                                    {u.name}
                                 </div>
                                 <div>
                                     {u.status}
@@ -72,10 +82,10 @@ export const Users = (props: UsersPropsType) => {
                             </div>
                             <div className={s.location}>
                                 <div className={s.location_country}>
-                                    {u.location.country}
+                                    {"u.location.country"}
                                 </div>
                                 <div className={s.location_city}>
-                                    {u.location.city}
+                                    {"u.location.city"}
                                 </div>
                             </div>
                         </div>
