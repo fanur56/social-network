@@ -61,8 +61,24 @@ export type SetUsersAT = {
     users: Array<UserType>
 }
 
+export type SetCurrentPageAT = {
+    type: "SET-CURRENT-PAGE"
+    currentPage: number
+}
+
+export type setTotalUsersCountAT = {
+    type: "SET-TOTAL-USERS-COUNT"
+    totalCount: number
+}
+
 export type UsersStateType = {
     users: Array<UserType>
+}
+
+export type UsersPageType = {
+    pageSize: number
+    totalCount: number
+    currentPage: number
 }
 
 export type UserType = {
@@ -92,6 +108,8 @@ export type DispatchActionType = (
     | FollowAT
     | UnfollowAT
     | SetUsersAT
+    | SetCurrentPageAT
+    | setTotalUsersCountAT
     )
 
 
