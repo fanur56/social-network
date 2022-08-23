@@ -1,3 +1,4 @@
+import {toggleIsFetchingAC} from "./users-reducer";
 
 export type SidebarType = {}
 
@@ -66,9 +67,14 @@ export type SetCurrentPageAT = {
     currentPage: number
 }
 
-export type setTotalUsersCountAT = {
+export type SetTotalUsersCountAT = {
     type: "SET-TOTAL-USERS-COUNT"
     totalCount: number
+}
+
+export type ToggleIsFetchingAT = {
+    type: "TOGGLE-IS-FETCHING"
+    isFetching: boolean
 }
 
 export type UsersStateType = {
@@ -79,6 +85,7 @@ export type UsersPageType = {
     pageSize: number
     totalCount: number
     currentPage: number
+    isFetching: boolean
 }
 
 export type UserType = {
@@ -109,7 +116,8 @@ export type DispatchActionType = (
     | UnfollowAT
     | SetUsersAT
     | SetCurrentPageAT
-    | setTotalUsersCountAT
+    | SetTotalUsersCountAT
+    | ToggleIsFetchingAT
     )
 
 
