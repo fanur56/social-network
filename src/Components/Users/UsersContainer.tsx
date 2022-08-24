@@ -51,7 +51,7 @@ class UserAPIComponent extends React.Component<UsersPropsType> {
 
     render() {
         return <>
-            {this.props.isFetching ? <Preloader /> : null}
+            {this.props.isFetching ? <Preloader/> : null}
             <UsersFC usersPage={this.props.usersPage}
                      changeUsersList={this.changeUsersList}
                      follow={this.props.follow}
@@ -70,28 +70,37 @@ const mapStateToProps = (state: ReduxStateType) => {
         isFetching: state.usersPage.isFetching
     }
 }
-
-const mapDispatchToProps = (dispatch: ReduxDispatchType) => {
-    return {
-        follow: (userID: number) => {
-            dispatch(followAC(userID))
-        },
-        unfollow: (userID: number) => {
-            dispatch(unfollowAC(userID))
-        },
-        setUsers: (users: Array<UserType>) => {
-            dispatch(setUsersAC(users))
-        },
-        setCurrentPage: (currentPage: number) => {
-            dispatch(setCurrentPageAC(currentPage))
-        },
-        setTotalUsersCount: (totalCount: number) => {
-            dispatch(setTotalUsersCountAC(totalCount))
-        },
-        toggleIsFetching: (toggleIsFetching: boolean) => {
-            dispatch(toggleIsFetchingAC(toggleIsFetching))
+{/*
+    const mapDispatchToProps = (dispatch: ReduxDispatchType) => {
+        return {
+            follow: (userID: number) => {
+                dispatch(followAC(userID))
+            },
+            unfollow: (userID: number) => {
+                dispatch(unfollowAC(userID))
+            },
+            setUsers: (users: Array<UserType>) => {
+                dispatch(setUsersAC(users))
+            },
+            setCurrentPage: (currentPage: number) => {
+                dispatch(setCurrentPageAC(currentPage))
+            },
+            setTotalUsersCount: (totalCount: number) => {
+                dispatch(setTotalUsersCountAC(totalCount))
+            },
+            toggleIsFetching: (toggleIsFetching: boolean) => {
+                dispatch(toggleIsFetchingAC(toggleIsFetching))
+            }
         }
     }
-}
+*/}
 
-export const UsersContainer = connect(mapStateToProps, mapDispatchToProps)(UserAPIComponent)
+
+export const UsersContainer = connect(mapStateToProps, {
+    follow: followAC,
+    unfollow: unfollowAC,
+    setUsers: setUsersAC,
+    setCurrentPage: setCurrentPageAC,
+    setTotalUsersCount: setTotalUsersCountAC,
+    toggleIsFetching: toggleIsFetchingAC
+})(UserAPIComponent)

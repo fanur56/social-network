@@ -2,10 +2,11 @@ import s from "./Users.module.css";
 import {UsersPageType, UsersStateType, UserType} from "../../redux/types";
 import avacat from "../../assets/images/avacat.jpg";
 import React from "react";
+import {NavLink} from "react-router-dom";
 
 type UsersFCPropsType = {
     usersPage: UsersPageType & UsersStateType
-    changeUsersList: (pageNumber: number)=>void
+    changeUsersList: (pageNumber: number) => void
     follow: (userID: number) => void
     unfollow: (userID: number) => void
 }
@@ -30,7 +31,9 @@ export const UsersFC = (props: UsersFCPropsType) => {
                 props.usersPage.users.map((u: UserType) => <div key={u.id} className={s.userContainer}>
                         <div className={s.avatarContainer}>
                             <div className={s.avatar}>
-                                <img src={u.photos.small != null ? u.photos.small : avacat} alt={"avatar"}/>
+                                <NavLink to={"/profile/" + u.id}>
+                                    <img src={u.photos.small != null ? u.photos.small : avacat} alt={"avatar"}/>
+                                </NavLink>
                             </div>
                             <div>
                                 {u.followed
