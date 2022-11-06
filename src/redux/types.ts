@@ -1,5 +1,3 @@
-import {toggleIsFetchingAC} from "./users-reducer";
-
 export type SidebarType = {}
 
 export type DialogType = {
@@ -21,6 +19,7 @@ export type MessagesDataType = {
 export type PostsType = {
     postsData: Array<PostsDataType>
     newPostText: string
+    profile: any | null
 }
 
 export type PostsDataType = {
@@ -77,6 +76,37 @@ export type ToggleIsFetchingAT = {
     isFetching: boolean
 }
 
+export type setUserProfileAT = {
+    type: "SET_USER_PROFILE"
+    profile: any
+}
+
+export type UserProfileType= {
+    aboutMe: string
+    contacts: UserProfileContactsType
+    lookingForAJob: boolean
+    lookingForAJobDescription: string
+    fullName: string
+    userId: number
+    photos: UserProfilePhotosType
+}
+
+export type UserProfileContactsType = {
+    facebook: string
+    website: string
+    vk: string
+    twitter: string
+    instagram: string
+    youtube: string
+    github: string
+    mainLink: string
+}
+
+export type UserProfilePhotosType = {
+    small: string
+    large: string
+}
+
 export type UsersStateType = {
     users: Array<UserType>
 }
@@ -118,6 +148,7 @@ export type DispatchActionType = (
     | SetCurrentPageAT
     | SetTotalUsersCountAT
     | ToggleIsFetchingAT
+    | setUserProfileAT
     )
 
 
@@ -184,6 +215,6 @@ export const store: StoreType = {
 }
 */
 
-//window.store = store
+
 
 
