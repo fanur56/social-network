@@ -25,9 +25,9 @@ type ProfilePropsType = MapStatePropsType & MapDispatchPropsType
 class ProfileContainer extends React.Component<PropsType> {
 
     componentDidMount() {
-        let userId = this.props.match.params.userId
-        if (!userId) {userId = "2"}
-        axios.get(`https://social-network.samuraijs.com/api/1.0/profile/` + userId)
+        let userID = this.props.match.params.userId
+        if (!userID) {userID = "2"}
+        axios.get(`https://social-network.samuraijs.com/api/1.0/profile/` + userID)
             .then(response => {
                 this.props.setUserProfile(response.data);
             });
