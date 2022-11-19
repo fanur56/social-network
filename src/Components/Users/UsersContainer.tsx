@@ -10,10 +10,9 @@ import {
     unfollowAC
 } from "../../redux/users-reducer";
 import {UsersPageType, UsersStateType, UserType} from "../../redux/types";
-import axios from "axios";
 import {UsersFC} from "./UsersFC";
 import {Preloader} from "../common/Preloader/Preloader";
-import {getUsers} from "../../api/api";
+import {usersAPI} from "../../api/api";
 
 type UsersPropsType = {
     follow: (userID: number) => void
@@ -31,10 +30,11 @@ class UserAPIComponent extends React.Component<UsersPropsType> {
     componentDidMount() {
         if (this.props.usersPage.users.length === 0) {
             this.props.toggleIsFetching(true)
-            getUsers(this.props.usersPage.currentPage, this.props.usersPage.pageSize).then(response => {
+            usersAPI.getUsers(this.props.usersPage.currentPage, this.props.usersPage.pageSize)
+                .then(data => {
                 this.props.toggleIsFetching(false)
-                this.props.setUsers(response.data.items);
-                this.props.setTotalUsersCount(response.data.totalCount);
+                this.props.setUsers(data.items);
+                this.props.setTotalUsersCount(data.totalCount);
             });
         }
     }
@@ -42,9 +42,9 @@ class UserAPIComponent extends React.Component<UsersPropsType> {
     changeUsersList = (pageNumber: number) => {
         this.props.toggleIsFetching(true)
         this.props.setCurrentPage(pageNumber);
-        getUsers(pageNumber, this.props.usersPage.pageSize).then(response => {
+        usersAPI.getUsers(pageNumber, this.props.usersPage.pageSize).then(data => {
                 this.props.toggleIsFetching(false)
-                this.props.setUsers(response.data.items);
+                this.props.setUsers(data.items);
             });
     }
 

@@ -3,7 +3,7 @@ import {UsersPageType, UsersStateType, UserType} from "../../redux/types";
 import avacat from "../../assets/images/avacat.jpg";
 import React from "react";
 import {NavLink} from "react-router-dom";
-import axios from "axios";
+import {usersAPI} from "../../api/api";
 
 type UsersFCPropsType = {
     usersPage: UsersPageType & UsersStateType
@@ -39,17 +39,15 @@ export const UsersFC = (props: UsersFCPropsType) => {
                             <div>
                                 {u.followed
                                     ? <button onClick={() => {
-                                        axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`, {withCredentials: true})
-                                            .then(response => {
-                                                if (response.data.resultCode === 0) {
+                                        usersAPI.follow(u.id).then((resultCode: number) => {
+                                                if (resultCode === 0) {
                                                     props.unfollow(u.id)
                                                 }
                                             });
                                     }}>Unfollow</button>
                                     : <button onClick={() => {
-                                        axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`, {}, {withCredentials: true})
-                                            .then(response => {
-                                                if (response.data.resultCode === 0) {
+                                        usersAPI.unfollow(u.id).then((resultCode: number) => {
+                                                if (resultCode === 0) {
                                                     props.follow(u.id)
                                                 }
                                             });

@@ -10,7 +10,7 @@ export const Post = (props: PostPropsType) => {
     return (
         <div className={styles.item}>
             <img alt="avatar"
-                 src="https://i.kym-cdn.com/entries/icons/original/000/001/420/977.jpg"/>
+                 src="../../../../assets/images/ava.png"/>
             {props.message}
             <div>
                 <span>like {props.likes}</span>
