@@ -81,6 +81,12 @@ export type setUserProfileAT = {
     profile: any
 }
 
+export type toggleIsFollowingProgressAC = {
+    type: "TOGGLE-IS-FOLLOWING-PROGRESS"
+    isFetching: boolean
+    userID: number
+}
+
 export type UserProfileType= {
     aboutMe: string
     contacts: UserProfileContactsType
@@ -116,6 +122,7 @@ export type UsersPageType = {
     totalCount: number
     currentPage: number
     isFetching: boolean
+    followingInProgress: Array<any>
 }
 
 export type UserType = {
@@ -149,6 +156,7 @@ export type DispatchActionType = (
     | SetTotalUsersCountAT
     | ToggleIsFetchingAT
     | setUserProfileAT
+    | toggleIsFollowingProgressAC
     )
 
 
