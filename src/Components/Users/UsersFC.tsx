@@ -3,14 +3,12 @@ import {UsersPageType, UsersStateType, UserType} from "../../redux/types";
 import avacat from "../../assets/images/avacat.jpg";
 import React from "react";
 import {NavLink} from "react-router-dom";
-import {usersAPI} from "../../api/api";
 
 type UsersFCPropsType = {
     usersPage: UsersPageType & UsersStateType
     changeUsersList: (pageNumber: number) => void
     follow: (userID: number) => void
     unfollow: (userID: number) => void
-    toggleIsFollowingProgress: (isFetching: boolean, userID: number) => void
 }
 
 export const UsersFC = (props: UsersFCPropsType) => {
@@ -40,27 +38,9 @@ export const UsersFC = (props: UsersFCPropsType) => {
                             <div>
                                 {u.followed
                                     ? <button disabled={props.usersPage.followingInProgress.some(id => id === u.id)}
-                                              onClick={() => {
-                                                  props.toggleIsFollowingProgress(true, u.id)
-                                                  usersAPI.follow(u.id).then((resultCode: number) => {
-                                                      if (resultCode === 0) {
-                                                          props.unfollow(u.id)
-                                                      }
-                                                      props.toggleIsFollowingProgress(false, u.id)
-                                                  });
-                                              }}>Unfollow</button>
+                                              onClick={() => {props.unfollow(u.id)}}>Unfollow</button>
                                     : <button disabled={props.usersPage.followingInProgress.some(id => id === u.id)}
-                                              onClick={() => {
-                                                  props.toggleIsFollowingProgress(true, u.id)
-                                                  usersAPI.unfollow(u.id).then((resultCode: number) => {
-                                                      if (resultCode === 0) {
-                                                          props.follow(u.id)
-                                                      }
-                                                      props.toggleIsFollowingProgress(false, u.id)
-                                                  });
-
-
-                                              }}>Follow</button>}
+                                              onClick={() => {props.follow(u.id)}}>Follow</button>}
                             </div>
                         </div>
                         <div className={s.descriptionContainer}>

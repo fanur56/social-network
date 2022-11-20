@@ -81,7 +81,7 @@ export type setUserProfileAT = {
     profile: any
 }
 
-export type toggleIsFollowingProgressAC = {
+export type toggleIsFollowingProgressAT = {
     type: "TOGGLE-IS-FOLLOWING-PROGRESS"
     isFetching: boolean
     userID: number
@@ -156,7 +156,7 @@ export type DispatchActionType = (
     | SetTotalUsersCountAT
     | ToggleIsFetchingAT
     | setUserProfileAT
-    | toggleIsFollowingProgressAC
+    | toggleIsFollowingProgressAT
     )
 
 

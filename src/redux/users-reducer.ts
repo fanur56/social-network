@@ -2,11 +2,13 @@ import {
     DispatchActionType,
     FollowAT,
     SetCurrentPageAT, SetTotalUsersCountAT,
-    SetUsersAT, ToggleIsFetchingAT,
+    SetUsersAT, ToggleIsFetchingAT, toggleIsFollowingProgressAT,
     UnfollowAT, UsersPageType,
     UsersStateType,
     UserType
 } from "./types";
+import {usersAPI} from "../api/api";
+import {ReduxDispatchType} from "./redux-store";
 
 const FOLLOW = "FOLLOW";
 const UNFOLLOW = "UNFOLLOW";
@@ -80,8 +82,8 @@ const usersReducer = (state = initialState, action: DispatchActionType) => {
 
 }
 
-export const followAC = (userID: number): FollowAT => ({type: FOLLOW, userID})
-export const unfollowAC = (userID: number): UnfollowAT => ({type: UNFOLLOW, userID})
+export const followSuccessAC = (userID: number): FollowAT => ({type: FOLLOW, userID})
+export const unfollowSuccessAC = (userID: number): UnfollowAT => ({type: UNFOLLOW, userID})
 export const setUsersAC = (users: Array<UserType>): SetUsersAT => ({type: SET_USERS, users})
 export const setCurrentPageAC = (currentPage: number): SetCurrentPageAT => ({type: SET_CURRENT_PAGE, currentPage})
 export const setTotalUsersCountAC = (totalCount: number): SetTotalUsersCountAT => ({
@@ -92,10 +94,46 @@ export const toggleIsFetchingAC = (isFetching: boolean): ToggleIsFetchingAT => (
     type: TOGGLE_IS_FETCHING,
     isFetching
 })
-export const toggleIsFollowingProgressAC = (isFetching: boolean, userID: number) => ({
+export const toggleIsFollowingProgressAC = (isFetching: boolean, userID: number): toggleIsFollowingProgressAT => ({
     type: TOGGLE_IS_FOLLOWING_PROGRESS,
     isFetching,
     userID
 })
+
+export const getUsersThunkCreator = (currentPage: number, pageSize: number) => {
+    return (dispatch: ReduxDispatchType) => {
+        dispatch(toggleIsFetchingAC(true))
+        usersAPI.getUsers(currentPage, pageSize)
+            .then(data => {
+                dispatch(toggleIsFetchingAC(false))
+                dispatch(setUsersAC(data.items))
+                dispatch(setTotalUsersCountAC(data.totalCount))
+            });
+    }
+}
+
+export const followThunkCreator = (userID: number) => {
+    return (dispatch: ReduxDispatchType) => {
+        dispatch(toggleIsFollowingProgressAC(true, userID))
+        usersAPI.follow(userID).then((resultCode: number) => {
+            if (resultCode === 0) {
+                dispatch(followSuccessAC(userID))
+            }
+            dispatch(toggleIsFollowingProgressAC(false, userID))
+        });
+    }
+}
+
+export const unfollowThunkCreator = (userID: number) => {
+    return (dispatch: ReduxDispatchType) => {
+        dispatch(toggleIsFollowingProgressAC(true, userID))
+        usersAPI.unfollow(userID).then((resultCode: number) => {
+            if (resultCode === 0) {
+                dispatch(unfollowSuccessAC(userID))
+            }
+            dispatch(toggleIsFollowingProgressAC(false, userID))
+        });
+    }
+}
 
 export default usersReducer;
