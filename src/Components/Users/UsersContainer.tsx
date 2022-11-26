@@ -2,10 +2,10 @@ import React from "react";
 import {connect} from "react-redux";
 import {ReduxStateType} from "../../redux/redux-store";
 import {
-    followSuccessAC, followThunkCreator, getUsersThunkCreator, toggleIsFollowingProgressAC,
-    unfollowSuccessAC, unfollowThunkCreator
+    followThunkCreator, getUsersThunkCreator, toggleIsFollowingProgressAC,
+    unfollowThunkCreator
 } from "../../redux/users-reducer";
-import {UsersPageType, UsersStateType, UserType} from "../../redux/types";
+import {UsersPageType, UsersStateType} from "../../redux/types";
 import {UsersFC} from "./UsersFC";
 import {Preloader} from "../common/Preloader/Preloader";
 

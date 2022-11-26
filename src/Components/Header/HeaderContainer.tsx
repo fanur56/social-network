@@ -1,39 +1,32 @@
 import React from "react";
 import {Header} from "./Header";
-import axios from "axios";
 import {connect} from "react-redux";
-import {setAuthUserDataAC} from "../../redux/auth-reducer";
-import {ReduxDispatchType, ReduxStateType} from "../../redux/redux-store";
+import {getAuthUserDataThunkCreator} from "../../redux/auth-reducer";
+import {ReduxStateType} from "../../redux/redux-store";
+
 
 class HeaderContainer extends React.Component<AuthPropsType> {
     componentDidMount() {
-        axios.get("https://social-network.samuraijs.com/api/1.0/auth/me",
-            {
-                withCredentials: true
-            })
-            .then(response => {
-                if (response.data.resultCode === 0) {
-                    const {id, email, login} = response.data.data;
-                    this.props.setAuthUserData(id, email, login);
-                }
-            })
+        this.props.getAuthUserData()
     }
 
     render() {
-        return <Header {...this.props}/>
+        return <Header isAuth={this.props.isAuth} login={this.props.login} />
     }
 }
 
-const mapStateToProps = (state: ReduxStateType) => ({
-    isAuth: state.auth.isAuth,
-    login: state.auth.login
-});
+const mapStateToProps = (state: ReduxStateType) => {
+    return {
+        isAuth: state.auth.isAuth,
+        login: state.auth.data.login
+    }
+};
 
-const mapDispatchToProps = (dispatch: ReduxDispatchType) => ({
-    setAuthUserData: setAuthUserDataAC
+const mapDispatchToProps = () => ({
+    getAuthUserData: getAuthUserDataThunkCreator
 })
 
-type AuthMapStateToPropsType = ReturnType<typeof mapStateToProps>
+export type AuthMapStateToPropsType = ReturnType<typeof mapStateToProps>
 type AuthMapDispatchToPropsType = ReturnType<typeof mapDispatchToProps>
 export type AuthPropsType = AuthMapStateToPropsType & AuthMapDispatchToPropsType
 

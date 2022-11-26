@@ -144,6 +144,15 @@ export type UsersLocationType = {
     city: string
 }
 
+export type setAuthUserDataAT = {
+    type: "SET_USER_DATA",
+    data: {
+        id: number,
+        email: string,
+        login: string
+    }
+}
+
 export type DispatchActionType = (
     AddPostAT
     | UpdateNewPostTextAT
@@ -157,72 +166,5 @@ export type DispatchActionType = (
     | ToggleIsFetchingAT
     | setUserProfileAT
     | toggleIsFollowingProgressAT
+    | setAuthUserDataAT
     )
-
-
-
-/*export type StoreType = {
-    _state: StateType
-    getState: () => StateType
-    _callSubscriber: (state: StateType) => void
-    subscribe: (observer: ObserverType) => void
-    dispatch: (action: DispatchActionType) => void
-    type ObserverType = (state: StateType) => void
-    export type StateType = {
-    messagesPage: DialogType
-    profilePage: PostsType
-    sidebar: SidebarType
-}
-}*/
-
-/*
-export const store: StoreType = {
-    _state: {
-        messagesPage: {
-            dialogData: [
-                {id: 1, name: "Oleg"},
-                {id: 2, name: "Ola"},
-                {id: 3, name: "Sergey"},
-                {id: 4, name: "Kent"},
-                {id: 5, name: "Garry"},
-                {id: 6, name: "Kenta"}
-            ],
-            messagesData: [
-                {id: 1, message: "Hello"},
-                {id: 2, message: "How are you?"},
-                {id: 3, message: "I am ok!"},
-            ],
-            newMessagesBody: ''
-        },
-        profilePage: {
-            postsData: [
-                {id: 1, message: 'Hello', likes: 0},
-                {id: 2, message: 'How are you?', likes: 12}
-            ],
-            newPostText: 'hello'
-        },
-        sidebar: {}
-    },
-    getState() {
-        return this._state
-    },
-    _callSubscriber() {
-        console.log('state changed')
-    },
-
-    subscribe(observer: ObserverType) {
-        this._callSubscriber = observer
-    },
-    dispatch(action) {
-
-        this._state.messagesPage = messagesReducer(this._state.messagesPage, action)
-        this._state.profilePage = profileReducer(this._state.profilePage, action)
-        this._state.sidebar = sidebarReducer(this._state.sidebar, action)
-        this._callSubscriber(this._state)
-    }
-}
-*/
-
-
-
-

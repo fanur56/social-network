@@ -1,43 +1,36 @@
-import {
-    DispatchActionType,
-    FollowAT,
-    SetCurrentPageAT, SetTotalUsersCountAT,
-    SetUsersAT, ToggleIsFetchingAT,
-    UnfollowAT,
-    UserType
-} from "./types";
+import {setAuthUserDataAT} from "./types";
+import {authAPI} from "../api/api";
+import {ReduxDispatchType} from "./redux-store";
 
 const SET_USER_DATA = "SET_USER_DATA";
 
 export type AuthStateType = {
-    userId: string | null,
-    email: string | null,
-    login: string | null,
+    data: {
+        id: number | null,
+        email: string | null,
+        login: string | null
+    },
     isAuth: boolean
 }
 
-type setAuthUserDataAT = {
-    type: "SET_USER_DATA",
-    data: {
-        userID: string,
-        email: string,
-        login: string
-    }
-}
 
 const initialState: AuthStateType = {
-    userId: null,
-    email: null,
-    login: null,
+    data: {
+        id: null,
+        email: null,
+        login: null
+    },
     isAuth: false
 }
 
 const authReducer = (state = initialState, action: setAuthUserDataAT) => {
+
     switch (action.type) {
         case SET_USER_DATA:
+            debugger
             return {
                 ...state,
-                ...action.data,
+                data: {...action.data},
                 isAuth: true
             }
         default:
@@ -46,13 +39,23 @@ const authReducer = (state = initialState, action: setAuthUserDataAT) => {
 
 }
 
-export const setAuthUserDataAC = (userID: string, email: string, login: string): setAuthUserDataAT => ({
+export const setAuthUserDataAC = (userID: number, email: string, login: string): setAuthUserDataAT => ({
     type: SET_USER_DATA,
     data: {
-        userID,
+        id: userID,
         email,
         login
     }
 })
+
+export const getAuthUserDataThunkCreator = () => (dispatch: ReduxDispatchType) => {
+    authAPI.me()
+        .then(response => {
+            if (response.data.resultCode === 0) {
+                const {id, email, login} = response.data.data;
+                dispatch(setAuthUserDataAC(id, email, login));
+            }
+        })
+}
 
 export default authReducer;

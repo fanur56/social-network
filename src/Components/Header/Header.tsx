@@ -1,9 +1,10 @@
 import React from "react";
 import style from './Header.module.css'
 import {NavLink} from "react-router-dom";
-import {AuthPropsType} from "./HeaderContainer";
+import {AuthMapStateToPropsType} from "./HeaderContainer";
 
-export const Header = (props: AuthPropsType) => {
+export const Header = (props: AuthMapStateToPropsType) => {
+
     return (
         <header className={style.header}>
             <img className={style.imgLogo} alt='pic'
