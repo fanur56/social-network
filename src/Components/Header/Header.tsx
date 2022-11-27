@@ -4,7 +4,6 @@ import {NavLink} from "react-router-dom";
 import {AuthMapStateToPropsType} from "./HeaderContainer";
 
 export const Header = (props: AuthMapStateToPropsType) => {
-
     return (
         <header className={style.header}>
             <img className={style.imgLogo} alt='pic'

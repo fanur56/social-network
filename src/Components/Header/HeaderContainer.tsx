@@ -22,12 +22,11 @@ const mapStateToProps = (state: ReduxStateType) => {
     }
 };
 
-const mapDispatchToProps = () => ({
-    getAuthUserData: getAuthUserDataThunkCreator
-})
-
 export type AuthMapStateToPropsType = ReturnType<typeof mapStateToProps>
-type AuthMapDispatchToPropsType = ReturnType<typeof mapDispatchToProps>
-export type AuthPropsType = AuthMapStateToPropsType & AuthMapDispatchToPropsType
+export type AuthPropsType = AuthMapStateToPropsType & AuthDispatchToPropsType
+export type AuthDispatchToPropsType = {
+    getAuthUserData: ()=>void
+}
 
-export default connect(mapStateToProps, mapDispatchToProps)(HeaderContainer);
+export default connect(mapStateToProps,
+    {getAuthUserData: getAuthUserDataThunkCreator})(HeaderContainer);

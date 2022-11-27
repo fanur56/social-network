@@ -11,6 +11,7 @@ type DialogsPropsType = {
     onNewMessageChange: (body: string) => void
     addDialogMessage: () => void
     messagesPage: DialogType
+    isAuth: boolean
 }
 
 export const Dialogs = (props: DialogsPropsType) => {
@@ -27,6 +28,8 @@ export const Dialogs = (props: DialogsPropsType) => {
             props.onNewMessageChange(body)
         }
     }
+
+    alert(props.isAuth)
 
     return (
         <div className={s.dialogs}>

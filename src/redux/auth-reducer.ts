@@ -24,10 +24,8 @@ const initialState: AuthStateType = {
 }
 
 const authReducer = (state = initialState, action: setAuthUserDataAT) => {
-
     switch (action.type) {
         case SET_USER_DATA:
-            debugger
             return {
                 ...state,
                 data: {...action.data},
@@ -39,23 +37,25 @@ const authReducer = (state = initialState, action: setAuthUserDataAT) => {
 
 }
 
-export const setAuthUserDataAC = (userID: number, email: string, login: string): setAuthUserDataAT => ({
+export const setAuthUserDataAC = (id: number, email: string, login: string): setAuthUserDataAT => ({
     type: SET_USER_DATA,
     data: {
-        id: userID,
+        id,
         email,
         login
     }
 })
 
-export const getAuthUserDataThunkCreator = () => (dispatch: ReduxDispatchType) => {
-    authAPI.me()
-        .then(response => {
-            if (response.data.resultCode === 0) {
-                const {id, email, login} = response.data.data;
-                dispatch(setAuthUserDataAC(id, email, login));
-            }
-        })
+export const getAuthUserDataThunkCreator = () => {
+    return (dispatch: ReduxDispatchType) => {
+        authAPI.me()
+            .then(response => {
+                if (response.data.resultCode === 0) {
+                    const authUserData = response.data.data;
+                    dispatch(setAuthUserDataAC(authUserData.id, authUserData.email, authUserData.login));
+                }
+            })
+    }
 }
 
 export default authReducer;

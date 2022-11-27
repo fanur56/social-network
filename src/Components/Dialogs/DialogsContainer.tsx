@@ -6,7 +6,8 @@ import {ReduxDispatchType, ReduxStateType} from "../../redux/redux-store";
 
 const mapStateToProps = (state: ReduxStateType) => {
     return {
-        messagesPage: state.messagesPage
+        messagesPage: state.messagesPage,
+        isAuth: state.auth.isAuth
     }
 }
 
