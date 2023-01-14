@@ -1,17 +1,6 @@
 import React from "react";
 import styles from './MyPosts.module.css'
 import {Post} from "./Post/Post";
-import {
-    PostsDataType,
-    PostsType
-} from "../../../redux/types";
-
-type MyPostsPropsType = {
-    profilePage: PostsType
-    addNewPost: () => void
-    onPostChange: (text: string) => void
-}
-
 
 export const MyPosts = (props: MyPostsPropsType) => {
 
@@ -48,4 +37,22 @@ export const MyPosts = (props: MyPostsPropsType) => {
             </div>
         </div>
     )
+}
+
+type MyPostsPropsType = {
+    profilePage: PostsType
+    addNewPost: () => void
+    onPostChange: (text: string) => void
+}
+
+export type PostsType = {
+    postsData: Array<PostsDataType>
+    newPostText: string
+    profile: any | null
+}
+
+export type PostsDataType = {
+    id: number
+    message: string
+    likes: number
 }

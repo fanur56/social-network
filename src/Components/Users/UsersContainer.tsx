@@ -5,9 +5,18 @@ import {
     followThunkCreator, getUsersThunkCreator, toggleIsFollowingProgressAC,
     unfollowThunkCreator
 } from "../../redux/users-reducer";
-import {UsersPageType, UsersStateType} from "../../redux/types";
 import {UsersFC} from "./UsersFC";
 import {Preloader} from "../common/Preloader/Preloader";
+import {UsersStateType} from "./Users";
+import {withAuthRedirect} from "../../HOC/withAuthRedirect";
+
+export type UsersPageType = {
+    pageSize: number
+    totalCount: number
+    currentPage: number
+    isFetching: boolean
+    followingInProgress: Array<any>
+}
 
 type UsersPropsType = {
     follow: (userID: number) => void
@@ -52,9 +61,11 @@ const mapStateToProps = (state: ReduxStateType) => {
     }
 }
 
-export const UsersContainer = connect(mapStateToProps, {
+export const UsersContainer = withAuthRedirect(connect(mapStateToProps, {
     follow: followThunkCreator,
     unfollow: unfollowThunkCreator,
     toggleIsFollowingProgress: toggleIsFollowingProgressAC,
     getUsers: getUsersThunkCreator
-})(UserAPIComponent)
+})(UserAPIComponent))
+
+

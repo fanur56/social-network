@@ -1,14 +1,9 @@
-import {
-    DispatchActionType,
-    FollowAT,
-    SetCurrentPageAT, SetTotalUsersCountAT,
-    SetUsersAT, ToggleIsFetchingAT, toggleIsFollowingProgressAT,
-    UnfollowAT, UsersPageType,
-    UsersStateType,
-    UserType
-} from "./types";
 import {usersAPI} from "../api/api";
 import {ReduxDispatchType} from "./redux-store";
+import {UsersStateType, UserType} from "../Components/Users/Users";
+import {UsersPageType} from "../Components/Users/UsersContainer";
+import {DispatchActionType} from "./profile-reducer";
+import {SetUsersAT} from "./auth-reducer";
 
 const FOLLOW = "FOLLOW";
 const UNFOLLOW = "UNFOLLOW";
@@ -137,3 +132,36 @@ export const unfollowThunkCreator = (userID: number) => {
 }
 
 export default usersReducer;
+
+export type FollowAT = {
+    type: 'FOLLOW'
+    userID: number
+}
+
+export type UnfollowAT = {
+    type: 'UNFOLLOW'
+    userID: number
+}
+
+export type SetCurrentPageAT = {
+    type: "SET-CURRENT-PAGE"
+    currentPage: number
+}
+
+export type SetTotalUsersCountAT = {
+    type: "SET-TOTAL-USERS-COUNT"
+    totalCount: number
+}
+
+export type ToggleIsFetchingAT = {
+    type: "TOGGLE-IS-FETCHING"
+    isFetching: boolean
+}
+
+
+
+export type toggleIsFollowingProgressAT = {
+    type: "TOGGLE-IS-FOLLOWING-PROGRESS"
+    isFetching: boolean
+    userID: number
+}

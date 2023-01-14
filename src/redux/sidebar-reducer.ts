@@ -1,4 +1,4 @@
-import {DispatchActionType, SidebarType} from "./types";
+import {DispatchActionType} from "./profile-reducer";
 
 const initialState: SidebarType = {}
 
@@ -7,3 +7,5 @@ const sidebarReducer = (state: SidebarType = initialState, action: DispatchActio
 }
 
 export default sidebarReducer
+
+export type SidebarType = {}

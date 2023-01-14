@@ -1,15 +1,8 @@
 import React from "react";
-import {UsersStateType, UserType} from "../../redux/types";
 import s from "./Users.module.css"
 import axios from "axios";
 import avacat from "../../assets/images/avacat.jpg"
 
-type UsersPropsType = {
-    follow: (userID: number) => void
-    unfollow: (userID: number) => void
-    setUsers: (users: Array<UserType>) => void
-    usersPage: UsersStateType
-}
 
 export const Users = (props: UsersPropsType) => {
 
@@ -59,4 +52,34 @@ export const Users = (props: UsersPropsType) => {
             }
         </div>
     )
+}
+
+export type UserType = {
+    id: number
+    photos: UserPhotosType
+    followed: boolean
+    name: string
+    status: string
+    location: UsersLocationType
+}
+
+export type UserPhotosType = {
+    small: string | null
+    large: string | null
+}
+
+export type UsersLocationType = {
+    country: string,
+    city: string
+}
+
+type UsersPropsType = {
+    follow: (userID: number) => void
+    unfollow: (userID: number) => void
+    setUsers: (users: Array<UserType>) => void
+    usersPage: UsersStateType
+}
+
+export type UsersStateType = {
+    users: Array<UserType>
 }

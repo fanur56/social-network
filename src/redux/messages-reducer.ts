@@ -1,4 +1,5 @@
-import {DialogType, DispatchActionType, SendMessageAT, UpdateNewMessageBodyAT} from "./types";
+import {DialogType} from "../Components/Dialogs/Dialogs";
+import {DispatchActionType} from "./profile-reducer";
 
 const UPDATE_NEW_MESSAGE_BODY = 'UPDATE-NEW-MESSAGE-BODY'
 const SEND_MESSAGE = 'SEND-MESSAGE'
@@ -46,3 +47,12 @@ export const updateNewMessageTextCreator = (body: string): UpdateNewMessageBodyA
 })
 
 export default messagesReducer;
+
+export type UpdateNewMessageBodyAT = {
+    type: 'UPDATE-NEW-MESSAGE-BODY'
+    body: string
+}
+
+export type SendMessageAT = {
+    type: 'SEND-MESSAGE'
+}

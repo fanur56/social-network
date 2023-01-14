@@ -1,11 +1,15 @@
+import {PostsType} from "../Components/Profile/MyPosts/MyPosts";
+import {UserProfileType} from "../Components/Profile/Profile";
+import {setAuthUserDataAT, SetUsersAT} from "./auth-reducer";
+import {SendMessageAT, UpdateNewMessageBodyAT} from "./messages-reducer";
 import {
-    AddPostAT,
-    DispatchActionType,
-    PostsType,
-    setUserProfileAT,
-    UpdateNewPostTextAT,
-    UserProfileType
-} from "./types";
+    FollowAT,
+    SetCurrentPageAT,
+    SetTotalUsersCountAT,
+    ToggleIsFetchingAT,
+    toggleIsFollowingProgressAT,
+    UnfollowAT
+} from "./users-reducer";
 
 const ADD_POST = "ADD-POST"
 const UPDATE_NEW_POST_TEXT = "UPDATE-NEW-POST-TEXT"
@@ -58,3 +62,33 @@ export const updateNewPostTextAC = (text: string): UpdateNewPostTextAT => ({
 export const setUserProfileAC = (profile: UserProfileType): setUserProfileAT => ({type: SET_USER_PROFILE, profile})
 
 export default profileReducer
+
+export type AddPostAT = {
+    type: 'ADD-POST'
+}
+
+export type UpdateNewPostTextAT = {
+    type: 'UPDATE-NEW-POST-TEXT'
+    newText: string
+}
+
+export type setUserProfileAT = {
+    type: "SET_USER_PROFILE"
+    profile: any
+}
+
+export type DispatchActionType = (
+    AddPostAT
+    | UpdateNewPostTextAT
+    | UpdateNewMessageBodyAT
+    | SendMessageAT
+    | FollowAT
+    | UnfollowAT
+    | SetUsersAT
+    | SetCurrentPageAT
+    | SetTotalUsersCountAT
+    | ToggleIsFetchingAT
+    | setUserProfileAT
+    | toggleIsFollowingProgressAT
+    | setAuthUserDataAT
+    )

@@ -2,13 +2,24 @@ import s from "./Dialogs.module.css"
 import React from "react";
 import {DialogMessage} from "./DialogItem/DialogsItem";
 import {DialogItem} from "./DialogMessage/DialogMessage";
-import {
-    DialogDataType, DialogType,
-    MessagesDataType
-} from "../../redux/types";
-import {Redirect} from "react-router-dom";
 
-type DialogsPropsType = {
+export type DialogType = {
+    dialogData: Array<DialogDataType>
+    messagesData: Array<MessagesDataType>
+    newMessagesBody: string
+}
+
+export type DialogDataType = {
+    id: number
+    name: string
+}
+
+export type MessagesDataType = {
+    id: number
+    message: string
+}
+
+export type DialogsPropsType = {
     onNewMessageChange: (body: string) => void
     addDialogMessage: () => void
     messagesPage: DialogType
@@ -30,7 +41,7 @@ export const Dialogs = (props: DialogsPropsType) => {
         }
     }
 
-    if (!props.isAuth) return <Redirect to={"/login"}/>
+
 
     return (
         <div className={s.dialogs}>

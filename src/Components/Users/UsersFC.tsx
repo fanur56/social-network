@@ -1,8 +1,9 @@
 import s from "./Users.module.css";
-import {UsersPageType, UsersStateType, UserType} from "../../redux/types";
 import avacat from "../../assets/images/avacat.jpg";
 import React from "react";
 import {NavLink} from "react-router-dom";
+import {UsersPageType} from "./UsersContainer";
+import {UsersStateType, UserType} from "./Users";
 
 type UsersFCPropsType = {
     usersPage: UsersPageType & UsersStateType
@@ -24,7 +25,6 @@ export const UsersFC = (props: UsersFCPropsType) => {
                              key={pages.indexOf(p)}
                              onClick={() => props.changeUsersList(p)}>{p} </span>
             })}
-
         </div>
         <div>
             {
