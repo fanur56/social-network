@@ -9,6 +9,7 @@ import {UsersFC} from "./UsersFC";
 import {Preloader} from "../common/Preloader/Preloader";
 import {UsersStateType} from "./Users";
 import {withAuthRedirect} from "../../HOC/withAuthRedirect";
+import {compose} from "redux";
 
 export type UsersPageType = {
     pageSize: number
@@ -24,14 +25,14 @@ type UsersPropsType = {
     usersPage: UsersStateType & UsersPageType
     isFetching: boolean
     toggleIsFollowingProgress: (isFetching: boolean, userID: number) => void
-    getUsers: (currentPage: number, pageSize: number)=>void
+    getUsers: (currentPage: number, pageSize: number) => void
 }
 
 class UserAPIComponent extends React.Component<UsersPropsType> {
 
     componentDidMount() {
         if (this.props.usersPage.users.length === 0)
-        this.props.getUsers(this.props.usersPage.currentPage, this.props.usersPage.pageSize)
+            this.props.getUsers(this.props.usersPage.currentPage, this.props.usersPage.pageSize)
     }
 
     changeUsersList = (pageNumber: number) => {
@@ -61,11 +62,13 @@ const mapStateToProps = (state: ReduxStateType) => {
     }
 }
 
-export const UsersContainer = withAuthRedirect(connect(mapStateToProps, {
-    follow: followThunkCreator,
-    unfollow: unfollowThunkCreator,
-    toggleIsFollowingProgress: toggleIsFollowingProgressAC,
-    getUsers: getUsersThunkCreator
-})(UserAPIComponent))
+export const UsersContainer = compose<React.ComponentType>(
+    withAuthRedirect,
+    connect(mapStateToProps, {
+        follow: followThunkCreator,
+        unfollow: unfollowThunkCreator,
+        toggleIsFollowingProgress: toggleIsFollowingProgressAC,
+        getUsers: getUsersThunkCreator
+    }))(UserAPIComponent)
 
 
