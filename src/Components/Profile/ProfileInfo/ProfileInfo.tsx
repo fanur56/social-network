@@ -2,6 +2,7 @@ import s from "../Profile.module.css";
 import React from "react";
 import {Preloader} from "../../common/Preloader/Preloader";
 import {ProfilePropsType} from "../Profile";
+import ProfileStatus from "./ProfileStatus";
 
 export const ProfileInfo = (props: ProfilePropsType) => {
     if (!props.profile) {
@@ -10,14 +11,15 @@ export const ProfileInfo = (props: ProfilePropsType) => {
 
     return (
         <div>
-            <div className={s.profileImage}>
+            {/*<div className={s.profileImage}>
                 <img alt='pic'
                      src='https://mediaproxy.salon.com/width/1200/https://media.salon.com/2022/04/planet-pluto-0405221.jpg'/>
-            </div>
+            </div>*/}
             <div className={s.avatarDescriptionContainer}>
                 <div className={s.avatar}>
                     <img src={props.profile.photos.large} alt="pic"/>
                 </div>
+                <ProfileStatus status={"Hello my friend"}/>
                 <div className={s.description}>
                     <div>
                         Full name: {props.profile.fullName}
