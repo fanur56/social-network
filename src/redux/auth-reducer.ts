@@ -1,8 +1,24 @@
 import {authAPI} from "../api/api";
 import {ReduxDispatchType} from "./redux-store";
-import {UserType} from "../Components/Users/Users";
 
 const SET_USER_DATA = "SET_USER_DATA";
+
+export type AuthStateType = {
+    data: {
+        id: number | null,
+        email: string | null,
+        login: string | null
+    },
+    isAuth: boolean
+}
+export type setAuthUserDataAT = {
+    type: "SET_USER_DATA",
+    data: {
+        id: number,
+        email: string,
+        login: string
+    }
+}
 
 const initialState: AuthStateType = {
     data: {
@@ -27,7 +43,7 @@ const authReducer = (state = initialState, action: setAuthUserDataAT) => {
 
 }
 
-export const setAuthUserDataAC = (id: number, email: string, login: string): setAuthUserDataAT => ({
+const setAuthUserDataAC = (id: number, email: string, login: string): setAuthUserDataAT => ({
     type: SET_USER_DATA,
     data: {
         id,
@@ -36,7 +52,7 @@ export const setAuthUserDataAC = (id: number, email: string, login: string): set
     }
 })
 
-export const getAuthUserDataThunkCreator = () => {
+export const getAuthUserDataTC = () => {
     return (dispatch: ReduxDispatchType) => {
         authAPI.me()
             .then(response => {
@@ -50,25 +66,4 @@ export const getAuthUserDataThunkCreator = () => {
 
 export default authReducer;
 
-export type SetUsersAT = {
-    type: "SET-USERS"
-    users: Array<UserType>
-}
 
-export type AuthStateType = {
-    data: {
-        id: number | null,
-        email: string | null,
-        login: string | null
-    },
-    isAuth: boolean
-}
-
-export type setAuthUserDataAT = {
-    type: "SET_USER_DATA",
-    data: {
-        id: number,
-        email: string,
-        login: string
-    }
-}

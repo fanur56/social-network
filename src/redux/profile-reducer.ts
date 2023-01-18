@@ -1,19 +1,40 @@
 import {PostsType} from "../Components/Profile/MyPosts/MyPosts";
 import {UserProfileType} from "../Components/Profile/Profile";
-import {setAuthUserDataAT, SetUsersAT} from "./auth-reducer";
-import {SendMessageAT, UpdateNewMessageBodyAT} from "./messages-reducer";
-import {
-    FollowAT,
-    SetCurrentPageAT,
-    SetTotalUsersCountAT,
-    ToggleIsFetchingAT,
-    toggleIsFollowingProgressAT,
-    UnfollowAT
-} from "./users-reducer";
+import {Dispatch} from "redux";
+import {profileAPI, usersAPI} from "../api/api";
 
 const ADD_POST = "ADD-POST"
 const UPDATE_NEW_POST_TEXT = "UPDATE-NEW-POST-TEXT"
 const SET_USER_PROFILE = "SET_USER_PROFILE"
+const SET_STATUS = "SET_STATUS"
+const UPDATE_STATUS = "UPDATE_STATUS"
+
+type AddPostAT = {
+    type: "ADD-POST"
+}
+type UpdateNewPostTextAT = {
+    type: "UPDATE-NEW-POST-TEXT"
+    newText: string
+}
+type setUserProfileAT = {
+    type: "SET_USER_PROFILE"
+    profile: any
+}
+type setStatusAT = {
+    type: "SET_STATUS"
+    status: string
+}
+type updateStatusAT = {
+    type: "UPDATE_STATUS"
+    status: string
+}
+export type profileReducerDispatchActionType = (
+    AddPostAT
+    | UpdateNewPostTextAT
+    | setUserProfileAT
+    | setStatusAT
+    | updateStatusAT
+    )
 
 const initialState: PostsType = {
     postsData: [
@@ -21,10 +42,11 @@ const initialState: PostsType = {
         {id: 2, message: "How are you?", likes: 12}
     ],
     newPostText: "hello",
-    profile: null
+    profile: null,
+    status: ""
 }
 
-const profileReducer = (state = initialState, action: DispatchActionType) => {
+const profileReducer = (state = initialState, action: profileReducerDispatchActionType) => {
     switch (action.type) {
         case ADD_POST:
             return {
@@ -49,6 +71,16 @@ const profileReducer = (state = initialState, action: DispatchActionType) => {
                 ...state,
                 profile: action.profile
             }
+        case SET_STATUS:
+            return {
+                ...state,
+                status: action.status
+            }
+        case UPDATE_STATUS:
+            return {
+                ...state,
+                status: action.status
+            }
         default:
             return state;
     }
@@ -60,35 +92,36 @@ export const updateNewPostTextAC = (text: string): UpdateNewPostTextAT => ({
     newText: text
 })
 export const setUserProfileAC = (profile: UserProfileType): setUserProfileAT => ({type: SET_USER_PROFILE, profile})
+export const setStatusAC = (status: string): setStatusAT => ({
+    type: SET_STATUS, status
+})
+
+const updateStatusAC = (status: string): updateStatusAT => ({
+    type: UPDATE_STATUS, status
+})
+
+export const getUserProfileTC = (userID: string) => (dispatch: Dispatch) => {
+    usersAPI.getProfile(+userID)
+        .then(response => {
+            dispatch(setUserProfileAC(response.data));
+        });
+}
+
+export const getStatusTC = (userID: string) => (dispatch: Dispatch) => {
+    profileAPI.getStatus(+userID)
+        .then((response) => {
+            dispatch(setStatusAC(response.data))
+        })
+}
+
+export const updateStatusTC = (status: string) => (dispatch: Dispatch) => {
+    profileAPI.updateStatus(status)
+        .then((response) => {
+            if (response.data.resultCode === 0) {
+                dispatch(updateStatusAC(status))
+            }
+        })
+}
 
 export default profileReducer
 
-export type AddPostAT = {
-    type: 'ADD-POST'
-}
-
-export type UpdateNewPostTextAT = {
-    type: 'UPDATE-NEW-POST-TEXT'
-    newText: string
-}
-
-export type setUserProfileAT = {
-    type: "SET_USER_PROFILE"
-    profile: any
-}
-
-export type DispatchActionType = (
-    AddPostAT
-    | UpdateNewPostTextAT
-    | UpdateNewMessageBodyAT
-    | SendMessageAT
-    | FollowAT
-    | UnfollowAT
-    | SetUsersAT
-    | SetCurrentPageAT
-    | SetTotalUsersCountAT
-    | ToggleIsFetchingAT
-    | setUserProfileAT
-    | toggleIsFollowingProgressAT
-    | setAuthUserDataAT
-    )

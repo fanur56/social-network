@@ -49,6 +49,7 @@ export type PostsType = {
     postsData: Array<PostsDataType>
     newPostText: string
     profile: any | null
+    status: string
 }
 
 export type PostsDataType = {

@@ -2,15 +2,15 @@ import React from "react";
 import {addNewPostAC, updateNewPostTextAC} from "../../../redux/profile-reducer";
 import {MyPosts} from "./MyPosts";
 import {connect} from "react-redux";
-import {ReduxDispatchType, ReduxStateType} from "../../../redux/redux-store";
+import {AppDispatchType, RootStateType} from "../../../redux/redux-store";
 
-const mapStateToProps=(state: ReduxStateType)=>{
+const mapStateToProps=(state: RootStateType)=>{
     return {
         profilePage: state.profilePage
     }
 }
 
-const mapDispatchToProps=(dispatch: ReduxDispatchType)=>{
+const mapDispatchToProps=(dispatch: AppDispatchType)=>{
     return {
         onPostChange: (text: string)=>{
             dispatch(updateNewPostTextAC(text))

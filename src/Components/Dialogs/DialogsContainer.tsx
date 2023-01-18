@@ -2,17 +2,17 @@ import React from "react";
 import {sendNewMessageBodyCreator, updateNewMessageTextCreator} from "../../redux/messages-reducer";
 import {Dialogs} from "./Dialogs";
 import {connect} from "react-redux";
-import {ReduxDispatchType, ReduxStateType} from "../../redux/redux-store";
+import {AppDispatchType, RootStateType} from "../../redux/redux-store";
 import {withAuthRedirect} from "../../HOC/withAuthRedirect";
 import {compose} from "redux";
 
-const mapStateToProps = (state: ReduxStateType) => {
+const mapStateToProps = (state: RootStateType) => {
     return {
         messagesPage: state.messagesPage
     }
 }
 
-const mapDispatchToProps = (dispatch: ReduxDispatchType) => {
+const mapDispatchToProps = (dispatch: AppDispatchType) => {
     return {
         onNewMessageChange: (body: string) => {
             dispatch(updateNewMessageTextCreator(body))

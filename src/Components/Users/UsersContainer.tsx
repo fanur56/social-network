@@ -1,6 +1,6 @@
 import React from "react";
 import {connect} from "react-redux";
-import {ReduxStateType} from "../../redux/redux-store";
+import {RootStateType} from "../../redux/redux-store";
 import {
     followThunkCreator, getUsersThunkCreator, toggleIsFollowingProgressAC,
     unfollowThunkCreator
@@ -51,7 +51,7 @@ class UserAPIComponent extends React.Component<UsersPropsType> {
 
 }
 
-const mapStateToProps = (state: ReduxStateType) => {
+const mapStateToProps = (state: RootStateType) => {
     return {
         usersPage: state.usersPage,
         pageSize: state.usersPage.pageSize,

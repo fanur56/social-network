@@ -2,8 +2,6 @@ import {usersAPI} from "../api/api";
 import {ReduxDispatchType} from "./redux-store";
 import {UsersStateType, UserType} from "../Components/Users/Users";
 import {UsersPageType} from "../Components/Users/UsersContainer";
-import {DispatchActionType} from "./profile-reducer";
-import {SetUsersAT} from "./auth-reducer";
 
 const FOLLOW = "FOLLOW";
 const UNFOLLOW = "UNFOLLOW";
@@ -12,6 +10,46 @@ const SET_CURRENT_PAGE = "SET-CURRENT-PAGE";
 const SET_TOTAL_USERS_COUNT = "SET-TOTAL-USERS-COUNT";
 const TOGGLE_IS_FETCHING = "TOGGLE-IS-FETCHING";
 const TOGGLE_IS_FOLLOWING_PROGRESS = "TOGGLE-IS-FOLLOWING-PROGRESS";
+
+type FollowAT = {
+    type: 'FOLLOW'
+    userID: number
+}
+type UnfollowAT = {
+    type: 'UNFOLLOW'
+    userID: number
+}
+type SetCurrentPageAT = {
+    type: "SET-CURRENT-PAGE"
+    currentPage: number
+}
+type SetTotalUsersCountAT = {
+    type: "SET-TOTAL-USERS-COUNT"
+    totalCount: number
+}
+type ToggleIsFetchingAT = {
+    type: "TOGGLE-IS-FETCHING"
+    isFetching: boolean
+}
+type toggleIsFollowingProgressAT = {
+    type: "TOGGLE-IS-FOLLOWING-PROGRESS"
+    isFetching: boolean
+    userID: number
+}
+type SetUsersAT = {
+    type: "SET-USERS"
+    users: Array<UserType>
+}
+
+export type usersReducerDispatchActionType = (
+    | FollowAT
+    | UnfollowAT
+    | SetUsersAT
+    | SetCurrentPageAT
+    | SetTotalUsersCountAT
+    | ToggleIsFetchingAT
+    | toggleIsFollowingProgressAT
+    )
 
 
 const initialState: UsersStateType & UsersPageType = {
@@ -23,7 +61,7 @@ const initialState: UsersStateType & UsersPageType = {
     followingInProgress: []
 }
 
-const usersReducer = (state = initialState, action: DispatchActionType) => {
+const usersReducer = (state = initialState, action: usersReducerDispatchActionType) => {
     switch (action.type) {
         case FOLLOW:
             return {
@@ -77,15 +115,15 @@ const usersReducer = (state = initialState, action: DispatchActionType) => {
 
 }
 
-export const followSuccessAC = (userID: number): FollowAT => ({type: FOLLOW, userID})
-export const unfollowSuccessAC = (userID: number): UnfollowAT => ({type: UNFOLLOW, userID})
-export const setUsersAC = (users: Array<UserType>): SetUsersAT => ({type: SET_USERS, users})
-export const setCurrentPageAC = (currentPage: number): SetCurrentPageAT => ({type: SET_CURRENT_PAGE, currentPage})
-export const setTotalUsersCountAC = (totalCount: number): SetTotalUsersCountAT => ({
+const followSuccessAC = (userID: number): FollowAT => ({type: FOLLOW, userID})
+const unfollowSuccessAC = (userID: number): UnfollowAT => ({type: UNFOLLOW, userID})
+const setUsersAC = (users: Array<UserType>): SetUsersAT => ({type: SET_USERS, users})
+const setCurrentPageAC = (currentPage: number): SetCurrentPageAT => ({type: SET_CURRENT_PAGE, currentPage})
+const setTotalUsersCountAC = (totalCount: number): SetTotalUsersCountAT => ({
     type: SET_TOTAL_USERS_COUNT,
     totalCount
 })
-export const toggleIsFetchingAC = (isFetching: boolean): ToggleIsFetchingAT => ({
+const toggleIsFetchingAC = (isFetching: boolean): ToggleIsFetchingAT => ({
     type: TOGGLE_IS_FETCHING,
     isFetching
 })
@@ -133,35 +171,4 @@ export const unfollowThunkCreator = (userID: number) => {
 
 export default usersReducer;
 
-export type FollowAT = {
-    type: 'FOLLOW'
-    userID: number
-}
 
-export type UnfollowAT = {
-    type: 'UNFOLLOW'
-    userID: number
-}
-
-export type SetCurrentPageAT = {
-    type: "SET-CURRENT-PAGE"
-    currentPage: number
-}
-
-export type SetTotalUsersCountAT = {
-    type: "SET-TOTAL-USERS-COUNT"
-    totalCount: number
-}
-
-export type ToggleIsFetchingAT = {
-    type: "TOGGLE-IS-FETCHING"
-    isFetching: boolean
-}
-
-
-
-export type toggleIsFollowingProgressAT = {
-    type: "TOGGLE-IS-FOLLOWING-PROGRESS"
-    isFetching: boolean
-    userID: number
-}
