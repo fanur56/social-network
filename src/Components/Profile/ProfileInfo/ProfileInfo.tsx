@@ -8,8 +8,8 @@ export const ProfileInfo = (props: ProfilePropsType) => {
     if (!props.profile) {
         return <Preloader/>
     }
-
     return (
+
         <div>
             {/*<div className={s.profileImage}>
                 <img alt='pic'
@@ -19,7 +19,7 @@ export const ProfileInfo = (props: ProfilePropsType) => {
                 <div className={s.avatar}>
                     <img src={props.profile.photos.large} alt="pic"/>
                 </div>
-                <ProfileStatus status={"Hello my friend"}/>
+                <ProfileStatus status={props.status} updateStatus={props.updateStatus}/>
                 <div className={s.description}>
                     <div>
                         Full name: {props.profile.fullName}

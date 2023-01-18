@@ -101,15 +101,17 @@ const updateStatusAC = (status: string): updateStatusAT => ({
 })
 
 export const getUserProfileTC = (userID: string) => (dispatch: Dispatch) => {
-    usersAPI.getProfile(+userID)
+        usersAPI.getProfile(+userID)
         .then(response => {
             dispatch(setUserProfileAC(response.data));
         });
 }
 
 export const getStatusTC = (userID: string) => (dispatch: Dispatch) => {
+    debugger
     profileAPI.getStatus(+userID)
         .then((response) => {
+            debugger
             dispatch(setStatusAC(response.data))
         })
 }

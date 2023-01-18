@@ -2,16 +2,19 @@ import React from "react";
 import {MyPostsContainer} from "./MyPosts/MyPostsContainer";
 import {ProfileInfo} from "./ProfileInfo/ProfileInfo";
 
-export const Profile = (props:ProfilePropsType) => {
+export const Profile = (props: ProfilePropsType) => {
+    debugger
     return (
         <div>
-            <ProfileInfo profile={props.profile}/>
-            <MyPostsContainer />
+            <ProfileInfo profile={props.profile}
+                         status={props.status}
+                         updateStatus={props.updateStatus}/>
+            <MyPostsContainer/>
         </div>
     )
 }
 
-export type UserProfileType= {
+export type UserProfileType = {
     aboutMe: string
     contacts: UserProfileContactsType
     lookingForAJob: boolean
@@ -39,4 +42,6 @@ export type UserProfilePhotosType = {
 
 export type ProfilePropsType = {
     profile: UserProfileType
+    status: string
+    updateStatus: (status: string) => void
 }
