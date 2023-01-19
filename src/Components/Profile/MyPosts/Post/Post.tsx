@@ -1,5 +1,6 @@
 import React from "react";
 import styles from './Post.module.css'
+import ava from "../../../../assets/images/ava.png";
 
 type PostPropsType = {
     message: string
@@ -10,7 +11,7 @@ export const Post = (props: PostPropsType) => {
     return (
         <div className={styles.item}>
             <img alt="avatar"
-                 src="../../../../assets/images/ava.png"/>
+                 src={ava}/>
             {props.message}
             <div>
                 <span>like {props.likes}</span>
