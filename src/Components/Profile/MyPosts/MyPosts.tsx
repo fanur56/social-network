@@ -1,13 +1,14 @@
 import React from "react";
 import styles from './MyPosts.module.css'
 import {Post} from "./Post/Post";
+import {Field, reduxForm} from "redux-form";
 
 export const MyPosts = (props: MyPostsPropsType) => {
 
     const newPostElement = React.createRef<HTMLTextAreaElement>()
 
-    const onAddNewPost = () => {
-        props.addNewPost()
+    const onAddNewPost = (values: any) => {
+        props.addNewPost(values.newPostText)
     }
 
     const onPostChange = () => {
@@ -22,13 +23,7 @@ export const MyPosts = (props: MyPostsPropsType) => {
             <div>
                 My posts
             </div>
-            <textarea ref={newPostElement}
-                      value={props.profilePage.newPostText}
-                      onChange={onPostChange}>
-            </textarea>
-            <button onClick={onAddNewPost}>
-                Add post
-            </button>
+            <AddNewPostForm onSubmit={onAddNewPost}/>
             <div className={styles.posts}>
                 New posts
                 {props.profilePage.postsData.map((m: PostsDataType) => <Post key={m.id}
@@ -39,9 +34,20 @@ export const MyPosts = (props: MyPostsPropsType) => {
     )
 }
 
+const AddNewPostForm = (props: any) => {
+    return <form action="" onSubmit={props.handleSubmit}>
+        <Field component={"textarea"} name={"newPostText"}/>
+        <button>
+            Add post
+        </button>
+    </form>
+}
+
+const AddNewPostFormRedux = reduxForm({form: "ProfileAddNewPostForm"})(AddNewPostForm)
+
 type MyPostsPropsType = {
     profilePage: PostsType
-    addNewPost: () => void
+    addNewPost: (value: string) => void
     onPostChange: (text: string) => void
 }
 

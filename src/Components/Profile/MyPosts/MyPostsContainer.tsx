@@ -15,8 +15,8 @@ const mapDispatchToProps=(dispatch: AppDispatchType)=>{
         onPostChange: (text: string)=>{
             dispatch(updateNewPostTextAC(text))
         },
-        addNewPost: ()=>{
-            dispatch(addNewPostAC())
+        addNewPost: (newPostText: string)=>{
+            dispatch(addNewPostAC(newPostText))
         }
     }
 }

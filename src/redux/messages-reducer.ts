@@ -1,6 +1,5 @@
 import {DialogType} from "../Components/Dialogs/Dialogs";
 
-const UPDATE_NEW_MESSAGE_BODY = 'UPDATE-NEW-MESSAGE-BODY'
 const SEND_MESSAGE = 'SEND-MESSAGE'
 
 
@@ -10,7 +9,8 @@ type UpdateNewMessageBodyAT = {
 }
 
 type SendMessageAT = {
-    type: 'SEND-MESSAGE'
+    type: 'SEND-MESSAGE',
+    newMessageBody: string
 }
 
 export type messagesReducerDispatchActionType = UpdateNewMessageBodyAT | SendMessageAT
@@ -34,30 +34,19 @@ const initialState: DialogType = {
 
 const messagesReducer = (state = initialState, action: messagesReducerDispatchActionType) => {
     switch (action.type) {
-        case UPDATE_NEW_MESSAGE_BODY:
-            return {
-                ...state,
-                newMessagesBody: action.body
-            }
         case SEND_MESSAGE:
             return {
                 ...state,
                 messagesData: [...state.messagesData, {
                     id: state.messagesData.length + 1,
-                    message: state.newMessagesBody
-                }],
-                newMessagesBody: ""
+                    message: action.newMessageBody
+                }]
             }
         default:
             return state
     }
 }
 
-export const sendNewMessageBodyCreator = (): SendMessageAT => ({type: SEND_MESSAGE})
-
-export const updateNewMessageTextCreator = (body: string): UpdateNewMessageBodyAT => ({
-    type: UPDATE_NEW_MESSAGE_BODY,
-    body: body
-})
+export const sendNewMessageBodyCreator = (newMessageBody: string): SendMessageAT => ({type: SEND_MESSAGE, newMessageBody})
 
 export default messagesReducer;

@@ -10,7 +10,8 @@ const SET_STATUS = "SET_STATUS"
 const UPDATE_STATUS = "UPDATE_STATUS"
 
 type AddPostAT = {
-    type: "ADD-POST"
+    type: "ADD-POST",
+    newPostText: string
 }
 type UpdateNewPostTextAT = {
     type: "UPDATE-NEW-POST-TEXT"
@@ -86,7 +87,7 @@ const profileReducer = (state = initialState, action: profileReducerDispatchActi
     }
 }
 
-export const addNewPostAC = (): AddPostAT => ({type: ADD_POST})
+export const addNewPostAC = (newPostText:string): AddPostAT => ({type: ADD_POST, newPostText})
 export const updateNewPostTextAC = (text: string): UpdateNewPostTextAT => ({
     type: UPDATE_NEW_POST_TEXT,
     newText: text
