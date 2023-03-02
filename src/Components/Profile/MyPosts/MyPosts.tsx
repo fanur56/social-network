@@ -1,21 +1,18 @@
 import React from "react";
 import styles from './MyPosts.module.css'
 import {Post} from "./Post/Post";
-import {Field, reduxForm} from "redux-form";
+import {Field, InjectedFormProps, reduxForm} from "redux-form";
+
+type FormDataType = {
+    newPostText: string
+}
 
 export const MyPosts = (props: MyPostsPropsType) => {
 
-    const newPostElement = React.createRef<HTMLTextAreaElement>()
+    //const newPostElement = React.createRef<HTMLTextAreaElement>()
 
     const onAddNewPost = (values: any) => {
         props.addNewPost(values.newPostText)
-    }
-
-    const onPostChange = () => {
-        if (newPostElement.current) {
-            let text = newPostElement.current.value
-            props.onPostChange(text)
-        }
     }
 
     return (
@@ -23,7 +20,7 @@ export const MyPosts = (props: MyPostsPropsType) => {
             <div>
                 My posts
             </div>
-            <AddNewPostForm onSubmit={onAddNewPost}/>
+            <AddNewPostFormRedux onSubmit={onAddNewPost}/>
             <div className={styles.posts}>
                 New posts
                 {props.profilePage.postsData.map((m: PostsDataType) => <Post key={m.id}
@@ -34,26 +31,26 @@ export const MyPosts = (props: MyPostsPropsType) => {
     )
 }
 
-const AddNewPostForm = (props: any) => {
-    return <form action="" onSubmit={props.handleSubmit}>
-        <Field component={"textarea"} name={"newPostText"}/>
+function AddNewPostForm (props: InjectedFormProps<FormDataType>) {
+    return <form onSubmit={props.handleSubmit}>
+        <div>
+            <Field component={"textarea"} name={"newPostText"}/>
+        </div>
         <button>
             Add post
         </button>
     </form>
 }
 
-const AddNewPostFormRedux = reduxForm({form: "ProfileAddNewPostForm"})(AddNewPostForm)
+const AddNewPostFormRedux = reduxForm<FormDataType>({form: "ProfileAddNewPostForm"})(AddNewPostForm)
 
 type MyPostsPropsType = {
     profilePage: PostsType
     addNewPost: (value: string) => void
-    onPostChange: (text: string) => void
 }
 
 export type PostsType = {
     postsData: Array<PostsDataType>
-    newPostText: string
     profile: any | null
     status: string
 }

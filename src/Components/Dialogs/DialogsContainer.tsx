@@ -6,6 +6,8 @@ import {AppDispatchType, RootStateType} from "../../redux/redux-store";
 import {withAuthRedirect} from "../../HOC/withAuthRedirect";
 import {compose} from "redux";
 
+
+
 const mapStateToProps = (state: RootStateType) => {
     return {
         messagesPage: state.messagesPage

@@ -28,8 +28,7 @@ const initialState: DialogType = {
         {id: 1, message: "Hello"},
         {id: 2, message: "How are you?"},
         {id: 3, message: "I am ok!"},
-    ],
-    newMessagesBody: ''
+    ]
 }
 
 const messagesReducer = (state = initialState, action: messagesReducerDispatchActionType) => {
