@@ -3,6 +3,7 @@ import React from "react";
 import {DialogMessage} from "./DialogItem/DialogsItem";
 import {DialogItem} from "./DialogMessage/DialogMessage";
 import {Field, FormSubmitHandler, InjectedFormProps, reduxForm} from "redux-form";
+import {AddMessageFormRedux} from "Components/Dialogs/AddMessageForm/AddMessageForm";
 
 export type DialogType = {
     dialogData: Array<DialogDataType>
@@ -26,7 +27,7 @@ export type DialogsPropsType = {
     isAuth: boolean
 }
 
-type FormDataType = {
+export type FormDataType = {
     newMessageBody: string
 }
 
@@ -52,13 +53,3 @@ export const Dialogs = (props: DialogsPropsType) => {
     )
 }
 
-const AddMessageForm = (props: InjectedFormProps<FormDataType>) => {
-    return <form onSubmit={props.handleSubmit} action="">
-        <div>
-            <Field component={"textarea"} name={"newMessageBody"} placeholder={"Enter your message"}/>
-            <button>Add message</button>
-        </div>
-    </form>
-}
-
-const AddMessageFormRedux = reduxForm<FormDataType>({form: "dialogAddMessageForm"})(AddMessageForm)
