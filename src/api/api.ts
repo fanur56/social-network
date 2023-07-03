@@ -1,47 +1,82 @@
 import axios from "axios";
+import {ProfileType} from "features/Profile/profile-reducer";
+import {LoginFormType} from "features/login/LoginReduxForm/LoginReduxForm";
 
 const instance = axios.create({
-    baseURL: "https://social-network.samuraijs.com/api/1.0/",
-    withCredentials: true
+    baseURL: 'https://social-network.samuraijs.com/api/1.0/',
+    withCredentials: true,
+    headers:{
+        'API-KEY': 'fe0bde16-910d-49bc-94ec-281d4e7919c5'
+    }
 })
 
 export const usersAPI = {
-    getUsers(currentPage = 1, pageSize = 10) {
+    getUsers: (currentPage: number = 1, pageSize: number = 100) => {
         return instance.get(`users?page=${currentPage}&count=${pageSize}`)
-            .then(response => response.data)
+            .then(res => res.data)
+    }
+}
+
+export const followAPI = {
+    postFollow: (userID: number) => {
+        return instance.post(`follow/${userID}`)
     },
-    follow(id: number) {
-        return instance.post(`follow/${id}`).then(response => response.data.resultCode)
-    },
-    unfollow(id: number) {
-        return instance.delete(`follow/${id}`).then(response => response.data.resultCode)
-    },
-    getProfile(userID: number) {
-        console.warn("Obsolete method. Please, use profileAPI")
-        return profileAPI.getProfile(userID)
+    deleteUnFollow: (userID: number) => {
+        return instance.delete(`follow/${userID}`)
     }
 }
 
 export const profileAPI = {
-    getProfile(userID: number) {
-        return instance.get(`profile/` + userID)
+    getProfile: (userID: string) => {
+        return instance.get(`profile/${userID}`)
     },
-    getStatus(userID:number) {
-        return instance.get(`profile/status/` + userID)
+    getStatus: (userID: string) => {
+        return instance.get(`profile/status/${userID}`)
     },
-    updateStatus(status:string){
-        return instance.put(`profile/status`, {status})
+    putStatus: (status: string) => {
+        return instance.put('profile/status', {status})
+    },
+    savePhoto: (file: File) => {
+        const formData = new FormData()
+        formData.append('image', file)
+        return instance.put('/profile/photo', formData, {
+            headers: {
+                'Content-Type': 'multipart/form-data'
+            }
+        })
+    },
+    saveProfile: (formData: ProfileType) => {
+        return instance.put('/profile', formData)
     }
+
 }
 
 export const authAPI = {
-    me() {
-        return instance.get("auth/me")
+    getAuth: () => {
+        return instance.get<MyDataType>(`auth/me`)
     },
-    login(email: string, password: string, rememberMe = false) {
-        return instance.post("auth/login", {email, password, rememberMe})
+    login: (formData: LoginFormType) => {
+        return instance.post('auth/login', {...formData})
     },
-    logout() {
-        return instance.delete("auth/login")
+    logout: () => {
+        return instance.delete('auth/login')
     }
+}
+
+export const securityAPI = {
+    getCaptcha: () => {
+        return instance.get('security/get-captcha-url')
+    }
+}
+
+export type MyDataType = {
+	data: MeType,
+	messages: string[];
+	fieldsErrors: string[];
+	resultCode: number;
+}
+export type MeType = {
+	id: number;
+	login: string;
+	email: string;
 }

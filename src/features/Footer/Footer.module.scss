@@ -1,0 +1,12 @@
+@import "../../common/styles/Variablies";
+
+.footerContainer {
+  background-color: $twoColor;
+  margin-top: 20px;
+
+  .footerBox {
+    margin: 0 auto;
+    width: 1100px;
+    height: 100px;
+  }
+}

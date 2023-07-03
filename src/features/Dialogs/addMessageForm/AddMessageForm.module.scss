@@ -1,0 +1,28 @@
+@import "../../../common/styles/Variablies";
+
+.form {
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 20%;
+  background-color: #F4F5F7;
+
+  .titleBox {
+    width: 100%;
+    margin-right: 25px;
+    margin-top: 10px;
+
+    textarea {
+      @include inputTextarea();
+      height: 60px !important;
+      resize: none;
+      text-align: left;
+    }
+  }
+
+  .button {
+    @include loginButton($bgColor, $white, 0.3s);
+    @include buttonStyle();
+  }
+}

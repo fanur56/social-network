@@ -1,0 +1,51 @@
+@import "./../../../common/styles/Variablies";
+
+.infoContentComponent {
+  width: 230px;
+  grid-area: infoContentComponent;
+
+  @media (max-width: 1140px) {
+    width: 300px;
+  }
+
+  @media (max-width: 900px) {
+    width: 100%;
+    margin-bottom: 25px;
+  }
+
+  .repairBox {
+    @include borderBox();
+    padding: 30px 5px;
+
+    @media (max-width: 1140px) {
+      margin-top: 25px;
+    }
+  }
+
+  .newsBox {
+    @include borderBox();
+    margin-top: 25px;
+
+    .title {
+      font-size: 16px;
+      font-weight: 600;
+      padding: 10px;
+      border-bottom: 1px solid #e5e5e5;
+      text-align: center;
+    }
+
+    .news {
+      padding: 10px 15px;
+      border-bottom: 1px solid #e5e5e5;
+
+      .link {
+        text-decoration: none;
+        color: #000;
+
+        span {
+          color: $linksColor;
+        }
+      }
+    }
+  }
+}

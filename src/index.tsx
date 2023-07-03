@@ -1,16 +1,18 @@
 import React from 'react';
 import './index.css';
-import {store} from "./redux/redux-store"
+import {store} from "app/redux-store";
 import ReactDOM from 'react-dom';
-import App from './App';
-import {BrowserRouter} from "react-router-dom";
+import './index.css';
+import {AppContainer} from 'app/App';
 import {Provider} from "react-redux";
+import { HashRouter } from 'react-router-dom';
 
 ReactDOM.render(
-    <BrowserRouter>
+    <HashRouter>
         <Provider store={store}>
-            <App/>
+            <AppContainer/>
         </Provider>
-    </BrowserRouter>,
+    </HashRouter>
+    ,
     document.getElementById('root')
 );
