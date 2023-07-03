@@ -2,11 +2,10 @@ import React from "react";
 import {addPostAC, ProfilePageType} from "../profile-reducer";
 import {MyPosts} from "./MyPosts";
 import {connect} from "react-redux";
-import {AppStateType} from "../../../app/redux-store";
+import {AppStateType} from "app/redux-store";
 import {Dispatch} from "redux";
 import {AddPostFormType} from "./addPostForm/AddPostForm";
 import {reset} from "redux-form";
-import {ResetAction} from "redux-form/lib/reduxForm";
 
 export type MyPostsPropsType = mapStatePropsType & mapDispatchPropsType
 

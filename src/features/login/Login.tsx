@@ -4,11 +4,11 @@ import {connect} from "react-redux";
 import {Dispatch} from "redux";
 import {loginTC} from "./auth-reducer";
 import {Redirect} from "react-router-dom";
-import {AppStateType} from "../../app/redux-store";
+import {AppStateType} from "app/redux-store";
 import styles from "./Login.module.scss"
 import {LoginInfo} from "./LoginInfo/LoginInfo";
 import {Registration} from "./Registration/Registration";
-import {RequestStatusType} from "../../app/app-reducer";
+import {RequestStatusType} from "app/app-reducer";
 
 const Login = (props: LoginPropsType) => {
 
@@ -34,14 +34,6 @@ const Login = (props: LoginPropsType) => {
     }
 
     return <div className={styles.loginComponent}>
-        <div className={styles.repair}>
-            <span>The project is under development. Some features may be unavailable.<br/>
-                <a
-                    className={styles.a}
-                    href={'https://github.com/Traihel/Social-network-TS'}
-                    target="_blank">Read more on GitHub</a>
-            </span>
-        </div>
         <div className={styles.loginBox}>
             <div className={styles.loginInfo}>
                 <div className={styles.oneCircle}></div>
@@ -65,14 +57,6 @@ const Login = (props: LoginPropsType) => {
                     <Registration/>
                 }
             </div>
-        </div>
-        <div className={styles.copyright}>
-            <span>Copyright © 2022. All Rights Reserved.</span>
-            <span>Developed by <a
-                className={styles.a}
-                href={'https://www.linkedin.com/in/vladimir-traihel/'}
-                target="_blank">Traihel Vladimir</a>
-            </span>
         </div>
     </div>
 };

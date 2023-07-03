@@ -3,7 +3,7 @@ import styles from "./User.module.scss";
 import usersImg from "../../../assets/images/usersImg.png";
 import {NavLink} from "react-router-dom";
 import {UsersType} from "../users-reducer";
-import {SvgSelector} from "../../../common/components/svgSelector/SvgSelector";
+import {SvgSelector} from "common/components/svgSelector/SvgSelector";
 
 type UserCompType = {
     user: UsersType

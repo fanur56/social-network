@@ -1,7 +1,6 @@
 import React, {DetailedHTMLProps, InputHTMLAttributes} from 'react'
 import styles from './RadioComponent.module.scss'
 
-// тип пропсов обычного инпута
 type DefaultInputPropsType = DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>
 
 type SuperCheckboxPropsType = DefaultInputPropsType & {

@@ -11,13 +11,13 @@ import {
     saveProfileTC,
     updateStatusTC
 } from "./profile-reducer";
-import {AppStateType} from "../../app/redux-store";
+import {AppStateType} from "app/redux-store";
 import {RouteComponentProps, withRouter} from "react-router-dom";
-import {withAuthRedirect} from "../../common/hoc/withAuthRedirect";
+import {withAuthRedirect} from "common/hoc/withAuthRedirect";
 import {InfoContent} from "./InfoContent/InfoContent";
 import styles from './Profile.module.scss';
 import {followTC, UsersType, usFollowTC} from "../Users/users-reducer";
-import {RequestStatusType} from "../../app/app-reducer";
+import {RequestStatusType} from "app/app-reducer";
 import {AddPostFormType} from "./MyPosts/addPostForm/AddPostForm";
 import {reset} from "redux-form";
 import {MyPosts} from "./MyPosts/MyPosts";

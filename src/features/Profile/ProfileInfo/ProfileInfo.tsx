@@ -4,10 +4,10 @@ import userImg from '../../../assets/images/usersImg.png'
 import {ProfileType} from "../profile-reducer";
 import {ProfileData} from "./ProfileData/ProfileData";
 import {ProfileDataReduxForm} from "./ProfileDataForm/ProfileDataForm";
-import {SvgSelector} from "../../../common/components/svgSelector/SvgSelector";
+import {SvgSelector} from "common/components/svgSelector/SvgSelector";
 import {ProfileStatusWithHooks} from "./profileStatus/ProfileStatusWithHooks";
 import {NavLink} from "react-router-dom";
-import {RequestStatusType} from "../../../app/app-reducer";
+import {RequestStatusType} from "app/app-reducer";
 
 type ProfileInfoType = {
     profile: ProfileType | null
