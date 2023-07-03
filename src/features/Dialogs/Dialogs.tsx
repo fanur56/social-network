@@ -4,7 +4,7 @@ import {DialogItem} from "./DialogItem/DialogItem";
 import {Message} from "./Message/Message";
 import {DialogsPropsType} from "./DialogsContainer";
 import {AddMessageFormRedux, AddMessageFormType} from "./addMessageForm/AddMessageForm";
-import {RepairComponent} from "../../common/components/RepairComponent/RepairComponent";
+import {RepairComponent} from "common/components/RepairComponent/RepairComponent";
 import imgAvatar from "../../assets/images/usersImg.png";
 
 export const Dialogs = (props: DialogsPropsType) => {
