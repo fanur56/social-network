@@ -9,12 +9,8 @@ type RepairComponentPropsType = {
 export const RepairComponent = (props: RepairComponentPropsType) => {
     return <div style={{textAlign: 'center'}} className={props.className}>
         <SvgSelector svgName={"Repair"}/>
-        <p>{props.text}
-            <br/>
-            <a style={{color: 'black'}}
-               target="_blank"
-               href={'https://github.com/Traihel/Social-network-TS'}
-            >Read more on GitHub</a>
+        <p>
+            {props.text}
         </p>
     </div>
 }
